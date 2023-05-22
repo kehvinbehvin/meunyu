@@ -1,10 +1,10 @@
 import { Box, Image } from '@chakra-ui/react';
 
-export default function ReelBubble() {
+export default function ReelBubble({ imageSrc }: { imageSrc: string }) {
   return (
     <Box mr={3} minW="50px">
       <Image
-        src="https://picsum.photos/1000/1000?random=5"
+        src={imageSrc}
         objectFit="cover"
         height="50px"
         borderRadius="50%"

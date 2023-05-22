@@ -5,7 +5,9 @@ import { DefaultSeo } from 'next-seo';
 
 import defaultSEOConfig from '../../next-seo.config';
 import { Chakra } from '~/lib/components/Chakra';
+import { ReelsContextProvider } from '~/lib/contexts/ReelsContext';
 import Layout from '~/lib/layout';
+
 import '~/lib/styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -19,7 +21,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
       <Layout>
-        <Component {...pageProps} />
+        <ReelsContextProvider>
+          <Component {...pageProps} />
+        </ReelsContextProvider>
       </Layout>
     </Chakra>
   );
