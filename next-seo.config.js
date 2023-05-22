@@ -1,25 +1,27 @@
 /** @type {import('next-seo').DefaultSeoProps} */
 const defaultSEOConfig = {
-  title: "nextarter-chakra",
-  titleTemplate: "%s | nextarter-chakra",
-  defaultTitle: "nextarter-chakra",
-  description: "Next.js + chakra-ui + TypeScript template",
-  canonical: "https://nextarter-chakra.sznm.dev",
+  title: 'Mattyu By Grace',
+  titleTemplate: '%s | Wedding of Matt & Eunyu',
+  defaultTitle: 'Wedding of Matt & Eunyu',
+  description:
+    "Congratulations to Matthew and Eunyu on their special day! Join us on this memorable occasion by uploading and viewing photos, playing a delightful 2 Truths 1 Lie game, and exploring their beautiful love story. Don't miss out on the joy and celebration! Share your moments, laughter, and love in this web app designed exclusively for their wedding.",
+  canonical: 'https://mattyubygrace.com',
   openGraph: {
-    url: "https://nextarter-chakra.sznm.dev",
-    title: "nextarter-chakra",
-    description: "Next.js + chakra-ui + TypeScript template",
+    url: 'https://mattyubygrace.com',
+    title: 'Mattyu By Grace',
+    description:
+      "Congratulations to Matthew and Eunyu on their special day! Join us on this memorable occasion by uploading and viewing photos, playing a delightful 2 Truths 1 Lie game, and exploring their beautiful love story. Don't miss out on the joy and celebration! Share your moments, laughter, and love in this web app designed exclusively for their wedding.",
     images: [
       {
-        url: "https://og-image.sznm.dev/**nextarter-chakra**.sznm.dev.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fsznm.dev%2Favataaars.svg&widths=250",
-        alt: "nextarter-chakra.sznm.dev og-image",
+        url: '',
+        alt: 'Mattyu By Grace',
       },
     ],
-    site_name: "nextarter-chakra",
+    site_name: 'Mattyu By Grace',
   },
   twitter: {
-    handle: "@sozonome",
-    cardType: "summary_large_image",
+    handle: '@sozonome',
+    cardType: 'summary_large_image',
   },
 };
 
