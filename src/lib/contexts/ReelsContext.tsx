@@ -9,8 +9,10 @@ type ReelsContextType = {
   setShowReel: Dispatch<SetStateAction<boolean>>;
 };
 
-type Reel = {
+export type Reel = {
   url: string;
+  author: string;
+  caption: string;
 };
 
 // Create the context
@@ -26,11 +28,35 @@ const ReelsContextProvider = ({ children }: { children: ReactNode }) => {
    */
   const getReels = async () => {
     setReels([
-      { url: 'https://picsum.photos/1000/1000?random=1' },
-      { url: 'https://picsum.photos/1000/1000?random=2' },
-      { url: 'https://picsum.photos/1000/1000?random=3' },
-      { url: 'https://picsum.photos/1000/1000?random=4' },
-      { url: 'https://picsum.photos/1000/1000?random=5' },
+      {
+        url: 'https://picsum.photos/1000/1000?random=1',
+        author: 'James',
+        caption: 'A serene sunset over the tranquil ocean.',
+      },
+      {
+        url: 'https://picsum.photos/1000/1000?random=2',
+        author: 'Hosan',
+        caption:
+          'Vibrant autumn leaves painting the landscape in fiery colors.',
+      },
+      {
+        url: 'https://picsum.photos/1000/1000?random=3',
+        author: 'Umed',
+        caption:
+          'A group of friends laughing and enjoying a picnic in the park.',
+      },
+      {
+        url: 'https://picsum.photos/1000/1000?random=4',
+        author: 'Don',
+        caption:
+          'The magnificent city skyline illuminated by a spectacular fireworks display.',
+      },
+      {
+        url: 'https://picsum.photos/1000/1000?random=5',
+        author: 'Crack',
+        caption:
+          'An artist passionately creating a masterpiece on a canvas with vibrant strokes.',
+      },
     ]);
   };
 
