@@ -10,7 +10,9 @@ const Home = () => {
   return (
     <Flex flexDir="column">
       <NextSeo title="Home" />
-      <Text>Welcome, guest</Text>
+      <Text fontSize="2xl" fontWeight="bold">
+        Welcome, guest
+      </Text>
       <ReelHeader />
       {showReel && <InstaStoryReels />}
     </Flex>

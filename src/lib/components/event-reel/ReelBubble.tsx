@@ -10,12 +10,12 @@ export default function ReelBubble({
   return (
     <Box
       mr={3}
-      minW="66px"
+      minW="68px"
       borderRadius="50%"
-      p="1px"
+      p="2px"
       backgroundImage="radial-gradient(circle at top left, red, orange)"
     >
-      <Box p="2px" background="white" borderRadius="50%" minW="60px">
+      <Box p="2px" background="white" borderRadius="50%" minW="62px">
         <Image
           onClick={onClick}
           src={imageSrc}
