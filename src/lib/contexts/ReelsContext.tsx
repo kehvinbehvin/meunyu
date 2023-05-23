@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useEffect, createContext, useState, useContext } from 'react';
-import type { ReactNode } from 'react';
+import type { ReactNode, SetStateAction, Dispatch } from 'react';
 
 // Define the type for your context data
 type ReelsContextType = {
   reels: Reel[];
+  showReel: boolean;
+  setShowReel: Dispatch<SetStateAction<boolean>>;
 };
 
 type Reel = {
@@ -17,6 +19,7 @@ const ReelsContext = createContext({} as ReelsContextType);
 // Create a provider component
 const ReelsContextProvider = ({ children }: { children: ReactNode }) => {
   const [reels, setReels] = useState<Reel[]>([]);
+  const [showReel, setShowReel] = useState<boolean>(false);
 
   /**
    * Fetch reels from server
@@ -36,7 +39,9 @@ const ReelsContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ReelsContext.Provider value={{ reels }}>{children}</ReelsContext.Provider>
+    <ReelsContext.Provider value={{ reels, showReel, setShowReel }}>
+      {children}
+    </ReelsContext.Provider>
   );
 };
 
