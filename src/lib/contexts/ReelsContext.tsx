@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
+import * as identicon from 'identicon';
 import { useEffect, createContext, useState, useContext } from 'react';
 import type { ReactNode, SetStateAction, Dispatch } from 'react';
 
@@ -13,6 +14,8 @@ export type Reel = {
   url: string;
   author: string;
   caption: string;
+  avatar: HTMLImageElement;
+  likes: number;
 };
 
 // Create the context
@@ -23,41 +26,70 @@ const ReelsContextProvider = ({ children }: { children: ReactNode }) => {
   const [reels, setReels] = useState<Reel[]>([]);
   const [showReel, setShowReel] = useState<boolean>(false);
 
+  const generateAvatar = (author: string): Promise<HTMLImageElement> => {
+    return new Promise((resolve, reject) => {
+      identicon.generate(
+        { id: author, size: 150 },
+        (err: Error, buffer: string) => {
+          if (err) reject(err);
+          const img = new Image();
+          img.src = buffer;
+          resolve(img);
+        }
+      );
+    });
+  };
+
   /**
    * Fetch reels from server
    */
   const getReels = async () => {
-    setReels([
+    const fetchedReels = [
       {
         url: 'https://picsum.photos/1000/1000?random=1',
-        author: 'James',
+        author: 'Alan',
         caption: 'A serene sunset over the tranquil ocean.',
+        likes: 54,
       },
       {
         url: 'https://picsum.photos/1000/1000?random=2',
-        author: 'Hosan',
+        author: 'Kim',
         caption:
           'Vibrant autumn leaves painting the landscape in fiery colors.',
+        likes: 23,
       },
       {
         url: 'https://picsum.photos/1000/1000?random=3',
-        author: 'Umed',
+        author: 'Jon',
         caption:
           'A group of friends laughing and enjoying a picnic in the park.',
+        likes: 17,
       },
       {
         url: 'https://picsum.photos/1000/1000?random=4',
-        author: 'Don',
+        author: 'Garei',
         caption:
           'The magnificent city skyline illuminated by a spectacular fireworks display.',
+        likes: 2,
       },
       {
         url: 'https://picsum.photos/1000/1000?random=5',
-        author: 'Crack',
+        author: 'Rachel',
         caption:
           'An artist passionately creating a masterpiece on a canvas with vibrant strokes.',
+        likes: 1,
       },
-    ]);
+    ];
+
+    const reelsWithAvatar = fetchedReels.map(async (reel) => {
+      const avatar = await generateAvatar(reel.author);
+      return {
+        ...reel,
+        avatar,
+      };
+    });
+
+    setReels(await Promise.all(reelsWithAvatar));
   };
 
   useEffect(() => {
