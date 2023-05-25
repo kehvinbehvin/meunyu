@@ -110,7 +110,7 @@ export default function UploadPhoto() {
                   Share your special moments
                 </Text>
                 <Text
-                  fontSize="sm"
+                  fontSize="md"
                   textAlign="center"
                   mt={5}
                   fontWeight="normal"
@@ -121,6 +121,8 @@ export default function UploadPhoto() {
                 </Text>
                 <Box
                   mx="auto"
+                  as={motion.div}
+                  whileTap={{ scale: 0.9 }}
                   border="1px dotted white"
                   mt={5}
                   width="fit-content"
@@ -163,7 +165,7 @@ export default function UploadPhoto() {
               >
                 <Textarea
                   mx="auto"
-                  fontSize="xs"
+                  fontSize="md"
                   placeholder="Write a caption for the photo"
                 />
                 <Flex>

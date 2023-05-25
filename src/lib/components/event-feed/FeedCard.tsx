@@ -1,11 +1,20 @@
 import { Flex, Heading, Icon, Image, Box, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { FaHeart } from 'react-icons/fa';
 
 import type { Reel } from '~/lib/contexts/ReelsContext';
 
 export default function FeedCard({ reel }: { reel: Reel }) {
   return (
-    <Box bg="white" py={5} px={4} mb={3} borderRadius={5}>
+    <Box
+      bg="white"
+      py={5}
+      px={4}
+      mb={3}
+      borderRadius={5}
+      as={motion.div}
+      whileTap={{ scale: 0.95 }}
+    >
       <Flex alignItems="center" mt={2}>
         <Image
           src={reel.avatar.src}
