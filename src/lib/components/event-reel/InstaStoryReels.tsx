@@ -8,7 +8,7 @@ import ReelRenderer from './ReelRenderer';
 export default function InstaStoryReels() {
   const { reels, setShowReel } = useReelsContext();
   return (
-    <Box position="fixed" inset="0 0 0 0" w="100vw" h="100vh">
+    <Box position="fixed" inset="0 0 0 0" w="100vw" h="100vh" zIndex={1}>
       <Stories
         stories={reels.map((reel) => ({
           ...reel,
