@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import {
   Box,
   Button,
@@ -6,13 +7,13 @@ import {
   Image,
   Text,
   Textarea,
+  keyframes,
 } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BiCloudUpload } from 'react-icons/bi';
-import { MdOutlineAddAPhoto } from 'react-icons/md';
-
-import { useDimensions } from '~/lib/hooks/use-dimensions';
+import { BsArrowUpCircleFill } from 'react-icons/bs';
+import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
 
 const formStateEnum = {
   UNOPENED: 'unopened',
@@ -25,14 +26,35 @@ export default function UploadPhoto() {
   const [formState, setFormState] = useState(formStateEnum.UNOPENED);
   const [image, setImage] = useState(null);
   const modalRef = useRef(null);
-  const { height } = useDimensions(modalRef);
 
   const submitHandler = async () => {
+    setFormState(formStateEnum.SUBMITTING);
+    // temporarily simulate loading state
+    await new Promise((r) => setTimeout(r, 4000));
+    setFormState(formStateEnum.SUBMITTED);
+  };
+
+  const cancelHandler = async () => {
     setFormState(formStateEnum.UNOPENED);
   };
 
+  useEffect(() => {
+    // automatically switch back to unopened state
+    if (formState === formStateEnum.SUBMITTED) {
+      setTimeout(() => setFormState(formStateEnum.UNOPENED), 2000);
+    }
+  }, [formState]);
+
+  const animationKeyframes = keyframes`
+    0% { transform: translate(-50%,-45%) }
+    50% { transform: translate(-50%, -68%) }
+    100% { transform: translate(-50%,-45%) }
+  `;
+
+  const animation = `${animationKeyframes} 1s ease-in-out infinite`;
+
   const variants = {
-    opened: (height = 1000) => ({
+    opened: () => ({
       clipPath: `circle(${1000 * 2 + 200}px at 85% 85%)`,
       transition: {
         type: 'spring',
@@ -40,7 +62,7 @@ export default function UploadPhoto() {
         restDelta: 2,
       },
     }),
-    submitting: (height = 1000) => ({
+    submitting: () => ({
       clipPath: `circle(30px at 85% 85%)`,
       transition: {
         delay: 0.5,
@@ -74,7 +96,6 @@ export default function UploadPhoto() {
         fontWeight="extrabold"
         initial={false}
         variants={variants}
-        custom={height}
         animate={formState}
         ref={modalRef}
       >
@@ -86,11 +107,41 @@ export default function UploadPhoto() {
             transform="translate(-50%,-50%)"
             as={MdOutlineAddAPhoto}
             color="white"
+            w="20px"
+            h="20px"
             onClick={() => setFormState(formStateEnum.OPENED)}
           />
         )}
         {formState === formStateEnum.SUBMITTING && (
-          <Box top="85%">Uploading your photo</Box>
+          <Box
+            as={motion.div}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            animation={animation}
+            position="absolute"
+            left="85%"
+            top="85%"
+            color="white"
+            transform="translate(-50%,-50%)"
+          >
+            <Icon as={BsArrowUpCircleFill} w="20px" h="20px" />
+          </Box>
+        )}
+        {formState === formStateEnum.SUBMITTED && (
+          <Box
+            as={motion.div}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            position="absolute"
+            left="85%"
+            top="85%"
+            color="white"
+            transform="translate(-50%,-50%)"
+          >
+            <Icon as={MdFileDownloadDone} w="20px" h="20px" />
+          </Box>
         )}
         {formState === formStateEnum.OPENED && (
           <motion.div
@@ -106,7 +157,7 @@ export default function UploadPhoto() {
           >
             <Box position="fixed" inset="0 0 0 0" bg="brand.200" color="white">
               <Box w="80%" mx="auto">
-                <Text fontSize="3xl" textAlign="center" mt={5}>
+                <Text fontSize="3xl" textAlign="center" mt={9}>
                   Share your special moments
                 </Text>
                 <Text
@@ -181,7 +232,7 @@ export default function UploadPhoto() {
                   <Button
                     w="50%"
                     mt={5}
-                    onClick={() => setFormState(formStateEnum.UNOPENED)}
+                    onClick={cancelHandler}
                     variant="outline"
                   >
                     Cancel
