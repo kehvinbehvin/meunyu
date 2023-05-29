@@ -24,12 +24,13 @@ const formStateEnum = {
 
 export default function UploadPhoto() {
   const [formState, setFormState] = useState(formStateEnum.UNOPENED);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef(null);
 
   const submitHandler = async () => {
     setFormState(formStateEnum.SUBMITTING);
     // temporarily simulate loading state
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise((r) => setTimeout(r, 4000));
     setFormState(formStateEnum.SUBMITTED);
   };
