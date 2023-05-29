@@ -2,9 +2,9 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const hello = (req: NextApiRequest, res: NextApiResponse) => {
+const healthCheck = (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200;
-  res.json({ name: 'John Doe' });
+  res.json({ status: 'Ok' });
 };
 
-export default hello;
+export default healthCheck;
