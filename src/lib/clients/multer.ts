@@ -8,8 +8,9 @@ const upload = multer({
         s3: cloudStorageProvider(),
         bucket: process.env.S3_BUCKET_NAME,
         key: function (req: any, file: any, cb: any) {
-            console.log(file)
-            cb(null, Date.now().toString());
+            const fileName = file.originalname.toLowerCase()
+            const fileExt = fileName.substring(fileName.lastIndexOf('.')+1, fileName.length) || fileName;
+            cb(null, Date.now().toString() + '.' + fileExt);
         }
     }),
     fileFilter: function(req: any, file: any, cb: any){
