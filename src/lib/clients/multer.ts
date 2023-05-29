@@ -11,7 +11,8 @@ const upload = multer({
             const fileName = file.originalname.toLowerCase()
             const fileExt = fileName.substring(fileName.lastIndexOf('.')+1, fileName.length) || fileName;
             cb(null, Date.now().toString() + '.' + fileExt);
-        }
+        },
+        contentType: multerS3.AUTO_CONTENT_TYPE
     }),
     fileFilter: function(req: any, file: any, cb: any){
         checkFileType(file, cb);
