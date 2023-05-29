@@ -20,5 +20,6 @@ export default router.handler({
 export const config = {
     api: {
         bodyParser: false, // Disallow body parsing, consume as stream
+        externalResolver: true, // False positive warnings https://github.com/vercel/next.js/discussions/40270
     },
 };
