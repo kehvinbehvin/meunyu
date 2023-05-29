@@ -9,8 +9,17 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <Box margin="0 auto" maxWidth={800} transition="0.5s ease-out">
-      <Box as="main" my={5} w="90%" mx="auto">
+    <Box
+      margin="0 auto"
+      h="100%"
+      maxWidth={800}
+      transition="0.5s ease-out"
+      bgColor="#EDE8E7"
+      color="#042A2B"
+      minH="100%"
+      pb={3}
+    >
+      <Box as="main" py={5} w="90%" mx="auto">
         {children}
       </Box>
       <Footer />
