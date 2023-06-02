@@ -7,9 +7,6 @@ import UploadPhoto from './UploadPhoto';
 
 export default function EventFeed() {
   const { feed } = useFeedContext();
-  if (!feed.length) {
-    return null;
-  }
   return (
     <Box>
       <Tabs>
@@ -30,14 +27,10 @@ export default function EventFeed() {
 
         <TabPanels>
           <TabPanel>
-            {feed.map((feedItem) => (
-              <FeedCard feed={feedItem} />
-            ))}
+            {feed && feed.map((feedItem) => <FeedCard feed={feedItem} />)}
           </TabPanel>
           <TabPanel>
-            {feed.map((feedItem) => (
-              <FeedCard feed={feedItem} />
-            ))}
+            {feed && feed.map((feedItem) => <FeedCard feed={feedItem} />)}
           </TabPanel>
         </TabPanels>
       </Tabs>
