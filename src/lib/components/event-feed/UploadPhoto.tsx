@@ -39,6 +39,10 @@ export default function UploadPhoto() {
     setFormState(formStateEnum.UNOPENED);
   };
 
+  const selectImageHandler = ({ target }: { target: HTMLInputElement }) => {
+    if (target.files) setImage(target.files[0]);
+  };
+
   useEffect(() => {
     // automatically switch back to unopened state
     if (formState === formStateEnum.SUBMITTED) {
@@ -204,7 +208,7 @@ export default function UploadPhoto() {
                     id="file-upload"
                     type="file"
                     style={{ display: 'none' }}
-                    onChange={(e) => setImage(e.target.files[0])}
+                    onChange={selectImageHandler}
                   />
                 </Box>
               </Box>

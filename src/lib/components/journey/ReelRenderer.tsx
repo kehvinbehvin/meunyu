@@ -1,6 +1,5 @@
 import { Box, Flex, Icon, Image, Spinner, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { FaHeart } from 'react-icons/fa';
 import { VscChromeClose } from 'react-icons/vsc';
 import type {
   Renderer,
@@ -9,7 +8,6 @@ import type {
 } from 'react-insta-stories/dist/interfaces';
 
 import type { Reel } from '~/lib/contexts/ReelsContext';
-import { useReelsContext } from '~/lib/contexts/ReelsContext';
 
 const ReelRenderer: Renderer = ({
   action,
@@ -19,7 +17,6 @@ const ReelRenderer: Renderer = ({
   story: Story;
 }) => {
   const [hasImageLoaded, setHasImageLoaded] = useState(false);
-  const { setShowReel } = useReelsContext();
   useEffect(() => {
     setHasImageLoaded(false);
   }, []);
@@ -31,7 +28,6 @@ const ReelRenderer: Renderer = ({
     <Box>
       <Icon
         as={VscChromeClose}
-        onClick={() => setShowReel(false)}
         position="absolute"
         top={6}
         right={5}
@@ -66,11 +62,10 @@ const ReelRenderer: Renderer = ({
         >
           <Box>
             <Text textTransform="uppercase" fontWeight="extrabold">
-              {(story as Reel).author}
+              {(story as Reel).title}
             </Text>
             <Text fontSize="xs">{(story as Reel).caption}</Text>
           </Box>
-          <Icon as={FaHeart} color="brand.400" />
         </Flex>
       </Box>
     </Box>

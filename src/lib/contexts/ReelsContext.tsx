@@ -94,6 +94,7 @@ const ReelsContextProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     getReels();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
