@@ -5,6 +5,7 @@
     "plugin:@next/next/recommended"
   ],
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

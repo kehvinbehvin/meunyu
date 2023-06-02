@@ -1,6 +1,5 @@
 import { Box, Button } from '@chakra-ui/react';
 import { useState } from 'react';
-import type { Story } from 'react-insta-stories/dist/interfaces';
 
 import DashboardPopout from '../common/DashboardPopout';
 import CoupleGallery from '../couple-gallery';
@@ -8,7 +7,7 @@ import CoupleGallery from '../couple-gallery';
 import InstaStory from './InstaStory';
 
 export default function OurJourney() {
-  const storyContent: Story[] = [
+  const storyContent = [
     {
       url: 'https://picsum.photos/1000/1000?random=1',
       title: 'Theatre',

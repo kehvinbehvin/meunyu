@@ -43,8 +43,8 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
    */
   const getFeed = async () => {
     const fetchedFeed = await (await fetch('/api/event-photo')).json();
-    const feedWithAvatar = fetchedFeed.data.map(async (feed) => {
-      const avatar = await generateAvatar(feed.url);
+    const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
+      const avatar = await generateAvatar(_feed.url);
       return {
         ...feed,
         avatar,
