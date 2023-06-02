@@ -15,6 +15,8 @@ import { BiCloudUpload } from 'react-icons/bi';
 import { BsArrowUpCircleFill } from 'react-icons/bs';
 import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
 
+import { useFeedContext } from '~/lib/contexts/FeedContext';
+
 const formStateEnum = {
   UNOPENED: 'unopened',
   OPENED: 'opened',
@@ -26,12 +28,11 @@ export default function UploadPhoto() {
   const [formState, setFormState] = useState(formStateEnum.UNOPENED);
   const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef(null);
+  const { uploadFeed } = useFeedContext();
 
   const submitHandler = async () => {
     setFormState(formStateEnum.SUBMITTING);
-    // temporarily simulate loading state
-    // eslint-disable-next-line no-promise-executor-return
-    await new Promise((r) => setTimeout(r, 4000));
+    if (image) await uploadFeed(image);
     setFormState(formStateEnum.SUBMITTED);
   };
 

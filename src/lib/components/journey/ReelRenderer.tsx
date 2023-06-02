@@ -7,8 +7,6 @@ import type {
   Action,
 } from 'react-insta-stories/dist/interfaces';
 
-import type { Reel } from '~/lib/contexts/ReelsContext';
-
 const ReelRenderer: Renderer = ({
   action,
   story,
@@ -62,9 +60,9 @@ const ReelRenderer: Renderer = ({
         >
           <Box>
             <Text textTransform="uppercase" fontWeight="extrabold">
-              {(story as Reel).title}
+              {(story as any).title}
             </Text>
-            <Text fontSize="xs">{(story as Reel).caption}</Text>
+            <Text fontSize="xs">{(story as any).caption}</Text>
           </Box>
         </Flex>
       </Box>
