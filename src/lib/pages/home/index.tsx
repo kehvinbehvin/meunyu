@@ -7,12 +7,12 @@ import { SiTestcafe } from 'react-icons/si';
 import DashboardPopout from '~/lib/components/common/DashboardPopout';
 import NavBar from '~/lib/components/common/NavBar';
 import CoupleGallery from '~/lib/components/couple-gallery';
-import InstaStoryReels from '~/lib/components/event-reel/InstaStoryReels';
-import ReelHeader from '~/lib/components/event-reel/ReelHeader';
-import { useReelsContext } from '~/lib/contexts/ReelsContext';
+// import InstaStoryReels from '~/lib/components/event-reel/InstaStoryReels';
+// import ReelHeader from '~/lib/components/event-reel/ReelHeader';
+// import { useReelsContext } from '~/lib/contexts/FeedContext';
 
 const Home = () => {
-  const { showReel } = useReelsContext();
+  // const { showReel } = useReelsContext();
   return (
     <Flex flexDir="column">
       <NextSeo title="Home" />
@@ -20,8 +20,8 @@ const Home = () => {
       <Text fontSize="2xl" fontWeight="bold" mt={3}>
         Welcome, guest
       </Text>
-      <ReelHeader />
-      {showReel && <InstaStoryReels />}
+      {/* <ReelHeader />
+      {showReel && <InstaStoryReels />} */}
       <Flex my={5} justifyContent="space-between">
         <DashboardPopout>
           <Icon as={FaScroll} fontSize="5xl" />

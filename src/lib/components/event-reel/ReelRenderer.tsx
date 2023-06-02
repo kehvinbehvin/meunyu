@@ -8,8 +8,8 @@ import type {
   Action,
 } from 'react-insta-stories/dist/interfaces';
 
-import type { Reel } from '~/lib/contexts/ReelsContext';
-import { useReelsContext } from '~/lib/contexts/ReelsContext';
+import type { Reel } from '~/lib/contexts/FeedContext';
+import { useReelsContext } from '~/lib/contexts/FeedContext';
 
 const ReelRenderer: Renderer = ({
   action,

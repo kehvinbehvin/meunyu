@@ -1,12 +1,15 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 
-import { useReelsContext } from '~/lib/contexts/ReelsContext';
+import { useFeedContext } from '~/lib/contexts/FeedContext';
 
 import FeedCard from './FeedCard';
 import UploadPhoto from './UploadPhoto';
 
 export default function EventFeed() {
-  const { reels } = useReelsContext();
+  const { feed } = useFeedContext();
+  if (!feed.length) {
+    return null;
+  }
   return (
     <Box>
       <Tabs>
@@ -27,13 +30,13 @@ export default function EventFeed() {
 
         <TabPanels>
           <TabPanel>
-            {reels.map((reel) => (
-              <FeedCard reel={reel} />
+            {feed.map((feedItem) => (
+              <FeedCard feed={feedItem} />
             ))}
           </TabPanel>
           <TabPanel>
-            {reels.map((reel) => (
-              <FeedCard reel={reel} />
+            {feed.map((feedItem) => (
+              <FeedCard feed={feedItem} />
             ))}
           </TabPanel>
         </TabPanels>
