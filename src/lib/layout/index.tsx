@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
       transition="0.5s ease-out"
       bgColor="#EDE8E7"
       color="#042A2B"
-      minH="100%"
+      minH="100vh"
       pb={3}
     >
       <Box as="main" py={5} w="90%" mx="auto">

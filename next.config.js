@@ -14,6 +14,15 @@ module.exports = withPWA({
   swcMinify: true,
   reactStrictMode: true,
   eslint: {
-    dirs: ["src"],
+    dirs: ['src'],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/feed',
+        permanent: true,
+      },
+    ];
   },
 });
