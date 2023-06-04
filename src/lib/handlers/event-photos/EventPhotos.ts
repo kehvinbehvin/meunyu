@@ -10,19 +10,56 @@ const registerEventPhotoRoutes = (router: any) => {
 
 const postEventPhotos = (router: any) => {
     router.post(multerMiddleware, async (req: any, res: NextApiResponse) => {
-        if (req.files.length === 0) {
-            res.json({ data: []})
-        } else {
+        try {
+            const files = req.files
+
+            if (files === undefined) {
+                return res.status(400).json({
+                    "error": "Bad Request"
+                })
+            }
+    
+            if (files.length === 0) {
+                return res.json({ data: []})
+            }
+    
             const savedFiles = await saveImages(req.files)
-            res.json({ data: savedFiles });
+    
+            return res.json({ data: savedFiles });   
+
+        } catch (error: any) {
+            return res.status(500).json({
+                error: "Internal server error"
+            })
         }
+        
     })
 }
 
 const getEventPhotos = (router: any) => {
     router.get(async (req: NextApiRequest, res: NextApiResponse) => {
-        const files = await loadImages({range: 1})
-        res.json({ data: files})
+        try {
+            const { page } = req.query
+        
+            if (page === undefined) {    
+                return res.status(400).json({
+                    error: "Bad Request"
+                })
+            }
+    
+            const files = await loadImages({
+                page: page,
+                pageLimit: 2,
+            })
+            
+            return res.json({ data: files})
+
+        } catch (error: any) {
+            return res.status(500).json({
+                error: "Internal server error"
+            })
+        }
+        
     })
 }
 
