@@ -6,7 +6,8 @@ const supabase = intialiseDB()
 export const saveImages = async (files: Array<any>) => {
     const payload = files.map((file) => {
         return {
-            "url": file.location
+            "url": file.location,
+            "likes": [],
         }
     })
 
@@ -20,11 +21,15 @@ export const saveImages = async (files: Array<any>) => {
 }
 
 export const loadImages = async (filters: any) => {
-    const range = filters.range
+    const { pageLimit, page } = filters
+    const to = pageLimit * page
+    const from = to - pageLimit
 
+    // Exlcude last item 
+    const adjustedTo = to - 1
+    
     try {
-        const { data } = await supabase.from('Image').select("*");
-        console.log("Images loaded")
+        const { data } = await supabase.rpc('load_sorted_images').select("*").range(from, adjustedTo);
         return data
     } catch(error) {
         console.error(error)
