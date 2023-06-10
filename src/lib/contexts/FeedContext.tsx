@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import * as identicon from 'identicon';
 import { useEffect, createContext, useState, useContext } from 'react';
 import type { ReactNode } from 'react';
 
@@ -24,19 +23,19 @@ const FeedContext = createContext({} as FeedContextType);
 const FeedContextProvider = ({ children }: { children: ReactNode }) => {
   const [feed, setFeed] = useState<FeedItem[]>([]);
 
-  const generateAvatar = (author: string): Promise<HTMLImageElement> => {
-    return new Promise((resolve, reject) => {
-      identicon.generate(
-        { id: author, size: 150 },
-        (err: Error, buffer: string) => {
-          if (err) reject(err);
-          const img = new Image();
-          img.src = buffer;
-          resolve(img);
-        }
-      );
-    });
-  };
+  // const generateAvatar = (author: string): Promise<HTMLImageElement> => {
+  //   return new Promise((resolve, reject) => {
+  //     identicon.generate(
+  //       { id: author, size: 150 },
+  //       (err: Error, buffer: string) => {
+  //         if (err) reject(err);
+  //         const img = new Image();
+  //         img.src = buffer;
+  //         resolve(img);
+  //       }
+  //     );
+  //   });
+  // };
 
   /**
    * Fetch feed from server
@@ -44,10 +43,10 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
   const getFeed = async () => {
     const fetchedFeed = await (await fetch('/api/event-photo')).json();
     const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
-      const avatar = await generateAvatar(_feed.url);
+      // const avatar = await generateAvatar(_feed.url);
       return {
         ..._feed,
-        avatar,
+        // avatar,
       };
     });
 
