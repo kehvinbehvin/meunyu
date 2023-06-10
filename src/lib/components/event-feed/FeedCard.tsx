@@ -1,11 +1,13 @@
 import { Flex, Heading, Icon, Image, Box, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 
 import type { FeedItem } from '~/lib/contexts/FeedContext';
 import { getRelativeTime } from '~/lib/utils';
 
 export default function FeedCard({ feed }: { feed: FeedItem }) {
+  const [isLiked, setIsLiked] = useState(false);
   return (
     <Box
       bg="white"
@@ -42,10 +44,13 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
           alignItems="center"
           border="1px solid"
           borderColor="red.500"
-          color="red.500"
+          color={isLiked ? 'white' : 'red.500'}
+          bgColor={isLiked ? 'red.500' : 'white'}
           px={2}
           py={1}
           borderRadius={4}
+          transition="all 100ms ease-in"
+          onClick={() => setIsLiked(!isLiked)}
         >
           <Icon as={FaHeart} mr={2} fontSize="xs" />
           <Text fontSize="xs">{feed.likes.length || 1}</Text>
