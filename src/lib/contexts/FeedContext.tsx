@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
+import { faker } from '@faker-js/faker';
 import * as identicon from 'identicon';
 import { useEffect, createContext, useState, useContext } from 'react';
 import type { ReactNode } from 'react';
@@ -14,7 +15,8 @@ export type FeedItem = {
   author: string;
   caption: string;
   avatar: HTMLImageElement;
-  likes: number;
+  likes: number[];
+  created_at: string;
 };
 
 // Create the context
@@ -46,7 +48,8 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
     const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
       const avatar = await generateAvatar(_feed.url);
       return {
-        ...feed,
+        author: faker.person.firstName(),
+        ..._feed,
         avatar,
       };
     });

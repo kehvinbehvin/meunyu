@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaHeart } from 'react-icons/fa';
 
 import type { FeedItem } from '~/lib/contexts/FeedContext';
+import { getRelativeTime } from '~/lib/utils';
 
 export default function FeedCard({ feed }: { feed: FeedItem }) {
   return (
@@ -47,9 +48,9 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
           borderRadius={4}
         >
           <Icon as={FaHeart} mr={2} fontSize="xs" />
-          <Text fontSize="xs">{feed.likes}</Text>
+          <Text fontSize="xs">{feed.likes.length || 1}</Text>
         </Flex>
-        <Text fontSize="xs">2 hours ago</Text>
+        <Text fontSize="xs">{getRelativeTime(feed.created_at)}</Text>
       </Flex>
     </Box>
   );
