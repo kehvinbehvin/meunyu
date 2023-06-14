@@ -22,7 +22,6 @@ const Layout = ({ children }: LayoutProps) => {
       <Box as="main" py={5} w="90%" mx="auto">
         {children}
       </Box>
-      <Footer />
     </Box>
   );
 };

@@ -1,20 +1,31 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
+
+type OptionType = {
+  value: string;
+  answer: boolean;
+};
 
 export default function QuestionTemplate({
   question,
   options,
   goNextQuestion,
+  setScore,
 }: {
   question: string;
-  options: { value: string; answer: boolean }[];
+  options: OptionType[];
   goNextQuestion: () => void;
+  setScore: Dispatch<SetStateAction<number>>;
 }) {
-  const [selection, setSelection] = useState('');
+  const [selection, setSelection] = useState<OptionType>({
+    value: '',
+    answer: false,
+  });
   const [hasAnswered, setHasAnswered] = useState(false);
 
   const reset = () => {
-    setSelection('');
+    setSelection({ value: '', answer: false });
     setHasAnswered(false);
   };
   return (
@@ -23,10 +34,10 @@ export default function QuestionTemplate({
       <Flex flexDir="column">
         {options.map(({ value, answer }) => {
           let border = '1px solid black';
-          if (!hasAnswered && selection === value) {
+          if (!hasAnswered && selection.value === value) {
             border = '2px solid black';
           }
-          if (hasAnswered && !answer && selection === value) {
+          if (hasAnswered && !answer && selection.value === value) {
             border = '2px solid red';
           }
           if (hasAnswered && answer) {
@@ -39,7 +50,7 @@ export default function QuestionTemplate({
               border={border}
               borderRadius="4px"
               my={3}
-              onClick={() => !hasAnswered && setSelection(value)}
+              onClick={() => !hasAnswered && setSelection({ value, answer })}
             >
               <Text>{value}</Text>
             </Box>
@@ -58,7 +69,16 @@ export default function QuestionTemplate({
             Next
           </Button>
         ) : (
-          <Button mx="auto" onClick={() => setHasAnswered(true)}>
+          <Button
+            mx="auto"
+            onClick={() => {
+              setHasAnswered(true);
+              setScore((score) => {
+                if (selection.answer) return score + 1;
+                return score;
+              });
+            }}
+          >
             Submit
           </Button>
         )}
