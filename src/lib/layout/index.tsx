@@ -1,8 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
-import Footer from './Footer';
-
 type LayoutProps = {
   children: ReactNode;
 };

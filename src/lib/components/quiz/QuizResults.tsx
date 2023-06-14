@@ -1,4 +1,5 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
 export default function QuizResults({ score }: { score: number }) {
   return (
@@ -12,6 +13,9 @@ export default function QuizResults({ score }: { score: number }) {
       <Text fontSize="lg" textAlign="center">
         You are doing well!
       </Text>
+      <Link href="/journey">
+        <Button>Back</Button>
+      </Link>
     </Box>
   );
 }
