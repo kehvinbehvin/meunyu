@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { SessionProvider } from 'next-auth/react';
 import { DefaultSeo } from 'next-seo';
 
 import defaultSEOConfig from '../../next-seo.config';
@@ -8,7 +9,10 @@ import { Chakra } from '~/lib/components/Chakra';
 import Layout from '~/lib/layout';
 import '~/lib/styles/globals.css';
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => {
   return (
     <Chakra>
       <Head>
@@ -19,7 +23,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
       <Layout>
-        <Component {...pageProps} />
+        <SessionProvider session={session}>
+          <Component {...pageProps} />
+        </SessionProvider>
       </Layout>
     </Chakra>
   );
