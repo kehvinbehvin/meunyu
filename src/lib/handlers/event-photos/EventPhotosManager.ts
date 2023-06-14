@@ -25,9 +25,9 @@ export const loadImages = async (filters: any) => {
     const to = pageLimit * page
     const from = to - pageLimit
 
-    // Exlcude last item 
+    // Exlcude last item
     const adjustedTo = to - 1
-    
+
     try {
         const { data } = await supabase.rpc('load_sorted_images').select("*").range(from, adjustedTo);
         return data

@@ -6,7 +6,9 @@ import { DefaultSeo } from 'next-seo';
 
 import defaultSEOConfig from '../../next-seo.config';
 import { Chakra } from '~/lib/components/Chakra';
+import { FeedContextProvider } from '~/lib/contexts/FeedContext';
 import Layout from '~/lib/layout';
+
 import '~/lib/styles/globals.css';
 
 const MyApp = ({
@@ -24,7 +26,9 @@ const MyApp = ({
       <DefaultSeo {...defaultSEOConfig} />
       <Layout>
         <SessionProvider session={session}>
-          <Component {...pageProps} />
+          <FeedContextProvider>
+            <Component {...pageProps} />
+          </FeedContextProvider>
         </SessionProvider>
       </Layout>
     </Chakra>
