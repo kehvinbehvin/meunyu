@@ -30,7 +30,7 @@ export default function NavBar() {
       justifyContent="space-around"
     >
       {routes.map((route) => (
-        <Link href={route.path}>
+        <Link href={route.path} key={route.path}>
           <Box>
             <Image
               src={route.icon.src}

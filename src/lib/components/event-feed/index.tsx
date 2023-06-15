@@ -27,10 +27,16 @@ export default function EventFeed() {
 
         <TabPanels>
           <TabPanel>
-            {feed && feed.map((feedItem) => <FeedCard feed={feedItem} />)}
+            {feed &&
+              feed.map((feedItem) => (
+                <FeedCard key={feedItem.created_at} feed={feedItem} />
+              ))}
           </TabPanel>
           <TabPanel>
-            {feed && feed.map((feedItem) => <FeedCard feed={feedItem} />)}
+            {feed &&
+              feed.map((feedItem) => (
+                <FeedCard key={feedItem.created_at} feed={feedItem} />
+              ))}
           </TabPanel>
         </TabPanels>
       </Tabs>
