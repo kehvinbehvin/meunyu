@@ -1,16 +1,16 @@
+import { Flex } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
 
 import NavBar from '~/lib/components/common/NavBar';
 import Quiz from '~/lib/components/quiz';
-import Layout from '~/lib/layout';
 
 function QuizPage() {
   return (
-    <Layout>
+    <Flex flexDir="column">
       <NextSeo title="Two truth one lie" />
       <Quiz />
       <NavBar />
-    </Layout>
+    </Flex>
   );
 }
 

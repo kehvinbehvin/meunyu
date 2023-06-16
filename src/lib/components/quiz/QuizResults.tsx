@@ -1,20 +1,27 @@
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+
+import PrimaryButton from '../common/PrimaryButton';
 
 export default function QuizResults({ score }: { score: number }) {
   return (
-    <Box my={9}>
-      <Text fontSize="2xl" textAlign="center">
-        Congratulations
+    <Box my={9} textAlign="center">
+      <Heading
+        textTransform="uppercase"
+        color="brand.300"
+        fontWeight="light"
+        fontSize="2xl"
+      >
+        Two truths, one lie
+      </Heading>
+      <Text fontSize="sm" color="white" textAlign="center" my={3}>
+        Your score
       </Text>
-      <Text fontSize="5xl" textAlign="center" my={3}>
+      <Text fontSize="lg" color="white" textAlign="center" my={3}>
         {score}%
       </Text>
-      <Text fontSize="lg" textAlign="center">
-        You are doing well!
-      </Text>
       <Link href="/journey">
-        <Button>Back</Button>
+        <PrimaryButton>Back</PrimaryButton>
       </Link>
     </Box>
   );

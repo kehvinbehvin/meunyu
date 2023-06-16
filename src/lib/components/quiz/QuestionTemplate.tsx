@@ -1,6 +1,8 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
+
+import PrimaryButton from '../common/PrimaryButton';
 
 type OptionType = {
   value: string;
@@ -8,12 +10,12 @@ type OptionType = {
 };
 
 export default function QuestionTemplate({
-  question,
+  explanation,
   options,
   goNextQuestion,
   setScore,
 }: {
-  question: string;
+  explanation: string;
   options: OptionType[];
   goNextQuestion: () => void;
   setScore: Dispatch<SetStateAction<number>>;
@@ -29,25 +31,36 @@ export default function QuestionTemplate({
     setHasAnswered(false);
   };
   return (
-    <Box>
-      <Text>{question}</Text>
-      <Flex flexDir="column">
+    <Box textAlign="center" color="brand.300" my={9}>
+      <Heading
+        textTransform="uppercase"
+        color="brand.300"
+        fontWeight="light"
+        fontSize="2xl"
+      >
+        Two truths, one lie
+      </Heading>
+      <Text fontSize="sm">Guess the lie</Text>
+      <Flex flexDir="column" mt={5}>
         {options.map(({ value, answer }) => {
-          let border = '1px solid black';
+          let styles = {};
           if (!hasAnswered && selection.value === value) {
-            border = '2px solid black';
+            styles = { boxShadow: 'xl', transform: 'scale(1.01)' };
           }
           if (hasAnswered && !answer && selection.value === value) {
-            border = '2px solid red';
+            styles = { bgColor: '#C8745E', outlineColor: '#C8745E' };
           }
           if (hasAnswered && answer) {
-            border = '2px solid green';
+            styles = { bgColor: 'brand.200', outlineColor: 'brand.200' };
           }
           return (
             <Box
               w="100%"
+              transition="all 100ms ease-in-out"
               p={3}
-              border={border}
+              outline="1px solid"
+              outlineColor="brand.200"
+              {...styles}
               borderRadius="4px"
               my={3}
               onClick={() => !hasAnswered && setSelection({ value, answer })}
@@ -57,20 +70,27 @@ export default function QuestionTemplate({
           );
         })}
       </Flex>
-      <Flex w="100%" alignItems="center" justifyContent="center">
+      {hasAnswered && (
+        <Box>
+          <Text>{explanation}</Text>
+        </Box>
+      )}
+      <Flex w="100%" alignItems="center" justifyContent="end" mt={9}>
         {hasAnswered ? (
-          <Button
+          <PrimaryButton
             mx="auto"
+            mr={0}
             onClick={() => {
               goNextQuestion();
               reset();
             }}
           >
             Next
-          </Button>
+          </PrimaryButton>
         ) : (
-          <Button
+          <PrimaryButton
             mx="auto"
+            mr={0}
             onClick={() => {
               setHasAnswered(true);
               setScore((score) => {
@@ -80,7 +100,7 @@ export default function QuestionTemplate({
             }}
           >
             Submit
-          </Button>
+          </PrimaryButton>
         )}
       </Flex>
     </Box>

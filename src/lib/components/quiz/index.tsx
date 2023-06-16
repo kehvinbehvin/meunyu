@@ -15,7 +15,7 @@ export default function Quiz() {
     <QuizResults score={Math.round((score * 100) / currentQuestion)} />
   ) : (
     <QuestionTemplate
-      question={QuestionBank[currentQuestion].question}
+      explanation={QuestionBank[currentQuestion].explanation}
       options={QuestionBank[currentQuestion].options}
       goNextQuestion={goNextQuestion}
       setScore={setScore}

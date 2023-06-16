@@ -165,11 +165,17 @@ export default function UploadPhoto() {
           >
             <Box position="fixed" inset="0 0 0 0" bg="brand.100" color="white">
               <Box w="80%" mx="auto">
-                <Heading fontSize="3xl" textAlign="center" mt={9}>
-                  Share your special moments
+                <Heading
+                  fontSize="3xl"
+                  textAlign="center"
+                  mt={9}
+                  textTransform="uppercase"
+                  fontWeight="light"
+                >
+                  Share your special moments with us
                 </Heading>
                 <Text
-                  fontSize="md"
+                  fontSize="sm"
                   textAlign="center"
                   mt={5}
                   fontWeight="normal"
