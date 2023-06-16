@@ -24,6 +24,8 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@faker-js/faker": "^8.0.2",
+    "@fontsource/cormorant-garamond": "^5.0.3",
+    "@fontsource/gotu": "^5.0.3",
     "@supabase/supabase-js": "^2.23.0",
     "dayjs": "^1.11.8",
     "framer-motion": "^10.12.4",

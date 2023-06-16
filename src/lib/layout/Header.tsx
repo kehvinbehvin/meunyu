@@ -1,13 +1,12 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Text, Flex, Image } from '@chakra-ui/react';
 
-import ThemeToggle from './ThemeToggle';
+import HeaderSmiley from '../../assets/header-smiley.png';
 
 const Header = () => {
   return (
-    <Flex as="header" width="full" align="center">
-      <Box marginLeft="auto">
-        <ThemeToggle />
-      </Box>
+    <Flex as="header" width="full" align="center" justify="center" pt={9}>
+      <Text color="#F5F5F5">#mattyubygrace</Text>
+      <Image src={HeaderSmiley.src} pos="absolute" right={0} />
     </Flex>
   );
 };

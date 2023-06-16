@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
+import Header from './Header';
 
 type LayoutProps = {
   children: ReactNode;
@@ -12,11 +13,12 @@ const Layout = ({ children }: LayoutProps) => {
       h="100%"
       maxWidth={800}
       transition="0.5s ease-out"
-      bgColor="#EDE8E7"
+      bgColor="brand.100"
       color="#042A2B"
       minH="100vh"
       pb={3}
     >
+      <Header />
       <Box as="main" py={5} w="90%" mx="auto">
         {children}
       </Box>
