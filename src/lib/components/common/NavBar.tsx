@@ -14,7 +14,7 @@ export default function NavBar() {
     { path: 'feed', icon: photo },
     { path: 'journey', icon: couple },
     { path: 'schedule', icon: schedule },
-    { path: 'mailbox', icon: message },
+    { path: 'message', icon: message },
   ];
 
   return (
