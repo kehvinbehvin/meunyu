@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import {
   Box,
-  Button,
   Flex,
   Heading,
   Icon,

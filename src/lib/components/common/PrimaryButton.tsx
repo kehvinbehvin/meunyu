@@ -8,6 +8,7 @@ export default function PrimaryButton({
 }: {
   onClick?: () => void;
   children: ReactNode;
+  [key: string]: unknown;
 }) {
   return (
     <Button

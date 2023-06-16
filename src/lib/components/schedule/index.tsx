@@ -16,7 +16,7 @@ export default function Schedule() {
           Holy matrimony
         </Heading>
         <Text fontSize="xs">
-          Lutheran Church of Our Redeemer Level 3 Sanctuary 30 Duke's Rd,
+          Lutheran Church of Our Redeemer Level 3 Sanctuary 30 Duke&apos;s Rd,
           Singapore 268912
         </Text>
         <Text fontSize="xs">Please be seated by 9.30am.</Text>

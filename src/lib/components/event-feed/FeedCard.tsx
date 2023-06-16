@@ -1,10 +1,9 @@
-import { Flex, Heading, Icon, Image, Box, Text } from '@chakra-ui/react';
+import { Flex, Icon, Image, Box, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 
 import type { FeedItem } from '~/lib/contexts/FeedContext';
-import { getRelativeTime } from '~/lib/utils';
 
 export default function FeedCard({ feed }: { feed: FeedItem }) {
   const [isLiked, setIsLiked] = useState(false);

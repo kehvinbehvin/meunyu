@@ -1,5 +1,4 @@
 import { Box, Text, Heading, Flex, Link } from '@chakra-ui/react';
-import { useState } from 'react';
 
 export default function OurJourney() {
   const routes = [
