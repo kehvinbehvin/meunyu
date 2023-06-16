@@ -23,7 +23,7 @@ export default function NavBar() {
       bottom={0}
       right={0}
       w="100vw"
-      bg="white"
+      bg="brand.200"
       zIndex={2}
       py={3}
       h="50px"
@@ -41,7 +41,7 @@ export default function NavBar() {
             <Box
               w="3px"
               h="3px"
-              bgColor="blue.500"
+              bgColor="white"
               mx="auto"
               borderRadius="500px"
               mt={1}

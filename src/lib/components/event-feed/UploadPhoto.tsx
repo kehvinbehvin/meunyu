@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Flex,
+  Heading,
   Icon,
   Image,
   Text,
@@ -15,6 +16,7 @@ import { BiCloudUpload } from 'react-icons/bi';
 import { BsArrowUpCircleFill } from 'react-icons/bs';
 import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
 
+import PrimaryButton from '../common/PrimaryButton';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
 
 const formStateEnum = {
@@ -94,7 +96,7 @@ export default function UploadPhoto() {
         as={motion.div}
         display="flex"
         position="fixed"
-        bg="brand.200"
+        bg="brand.100"
         inset="0 0 0 0"
         p={5}
         alignItems="center"
@@ -161,11 +163,11 @@ export default function UploadPhoto() {
               width: '100vw',
             }}
           >
-            <Box position="fixed" inset="0 0 0 0" bg="brand.200" color="white">
+            <Box position="fixed" inset="0 0 0 0" bg="brand.100" color="white">
               <Box w="80%" mx="auto">
-                <Text fontSize="3xl" textAlign="center" mt={9}>
+                <Heading fontSize="3xl" textAlign="center" mt={9}>
                   Share your special moments
-                </Text>
+                </Heading>
                 <Text
                   fontSize="md"
                   textAlign="center"
@@ -226,23 +228,25 @@ export default function UploadPhoto() {
                   placeholder="Write a caption for the photo"
                 />
                 <Flex>
-                  <Button
+                  <PrimaryButton
                     w="50%"
                     mt={5}
+                    px={5}
                     onClick={submitHandler}
                     variant="solid"
                     mr={3}
                   >
-                    Submit
-                  </Button>
-                  <Button
+                    Share
+                  </PrimaryButton>
+                  <PrimaryButton
                     w="50%"
                     mt={5}
+                    px={5}
                     onClick={cancelHandler}
                     variant="outline"
                   >
                     Cancel
-                  </Button>
+                  </PrimaryButton>
                 </Flex>
               </Flex>
             </Box>

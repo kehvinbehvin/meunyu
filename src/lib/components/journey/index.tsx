@@ -1,43 +1,56 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Text, Heading, Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import DashboardPopout from '../common/DashboardPopout';
-import CoupleGallery from '../couple-gallery';
-
-import InstaStory from './InstaStory';
-
 export default function OurJourney() {
-  const storyContent = [
+  const routes = [
     {
-      url: 'https://picsum.photos/1000/1000?random=1',
-      title: 'Theatre',
-      caption:
-        'Cillum Lorem adipisicing deserunt aute aute qui dolor labore laboris elit Lorem.',
+      href: '/journey/story',
+      header: 'Our Story',
+      subtitle: "Love's journey revealed",
     },
     {
-      url: 'https://picsum.photos/1000/1000?random=2',
-      title: 'Proposal',
-      caption:
-        'Cillum Lorem adipisicing deserunt aute aute qui dolor labore laboris elit Lorem.',
+      href: '/journey/gallery',
+      header: 'Gallery',
+      subtitle: 'Our cherished moments',
+    },
+    {
+      href: '/journey/story',
+      header: 'Two truths, One lie',
+      subtitle: 'How much do you know us?',
     },
   ];
-
-  const [showReels, setShowReels] = useState(false);
   return (
     <Box>
-      <DashboardPopout attr={{ w: '100%', mt: 5 }}>
-        <CoupleGallery />
-      </DashboardPopout>
-      <DashboardPopout attr={{ w: '100%', mt: 5 }}>
-        <Button onClick={() => setShowReels(true)}>Show reels</Button>
-      </DashboardPopout>
-
-      {showReels && (
-        <InstaStory stories={storyContent} setShowReels={setShowReels} />
-      )}
-      <DashboardPopout attr={{ w: '100%', mt: 5 }}>
-        <CoupleGallery />
-      </DashboardPopout>
+      {routes.map((route) => (
+        <Box
+          color="brand.300"
+          textAlign="center"
+          borderRadius="500px"
+          h="150px"
+          my={9}
+          bgImage={
+            "url('https://images.pexels.com/photos/2403568/pexels-photo-2403568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"
+          }
+          bgSize="cover"
+          bgPos="center"
+          pos="relative"
+          overflow="hidden"
+        >
+          <Flex
+            position="absolute"
+            inset="0 0 0 0"
+            bg="rgba(0,0,0,0.5)"
+            flexDir="column"
+            align="center"
+            justify="center"
+          >
+            <Heading textTransform="uppercase" fontSize="2xl">
+              {route.header}
+            </Heading>
+            <Text>{route.subtitle}</Text>
+          </Flex>
+        </Box>
+      ))}
     </Box>
   );
 }
