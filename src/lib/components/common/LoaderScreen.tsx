@@ -60,7 +60,15 @@ export default function LoaderScreen() {
             flexDir="column"
           >
             <Image src={WeddingRingGif.src} w="100px" h="100px" />
-            <Text fontSize="sm" textAlign="center">
+            <Text
+              fontSize="sm"
+              textAlign="center"
+              as={motion.p}
+              initial={{ transform: 'translateX(20px)', opacity: 0 }}
+              animate={{ transform: 'translateX(0)', opacity: 1 }}
+              exit={{ transform: 'translateX(-20px)', opacity: 0 }}
+              key={displayText}
+            >
               {displayText}...
             </Text>
           </Flex>
