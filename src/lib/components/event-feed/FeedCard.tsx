@@ -8,6 +8,7 @@ import { getRelativeTime } from '~/lib/utils';
 
 export default function FeedCard({ feed }: { feed: FeedItem }) {
   const [isLiked, setIsLiked] = useState(false);
+  console.log(feed)
   return (
     <Box
       bg="rgba(127, 130, 107, 0.5)"
@@ -49,7 +50,7 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
         >
           <Icon as={FaHeart} mr={2} fontSize="xs" />
           <Text fontSize="md" color="white">
-            {feed.likes.length || 1}
+            {feed.likes?.length || 1}
           </Text>
         </Flex>
       </Flex>

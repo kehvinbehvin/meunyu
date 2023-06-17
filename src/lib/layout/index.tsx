@@ -12,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
     <Box
       margin="0 auto"
       h="100%"
-      maxWidth={800}
+      maxWidth="300px"
       transition="0.5s ease-out"
       bgColor="brand.100"
       color="#042A2B"
@@ -20,6 +20,7 @@ const Layout = ({ children }: LayoutProps) => {
       pb={3}
       pt={5}
       mb={9}
+      pos="relative"
     >
       <Header />
       <Box as="main" py={5} w="90%" mx="auto">
