@@ -1,5 +1,5 @@
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Box, Flex, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 
