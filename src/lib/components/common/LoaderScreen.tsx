@@ -13,10 +13,14 @@ export default function LoaderScreen() {
     "Shaving groom's beard",
     'Polishing wedding rings',
     'Frosting wedding cake',
-    'Getting destroyed in gatecrash',
+    'Surviving the gatecrash',
+    'Memorising vows',
+    'Groom learning korean',
   ];
 
-  const [textIndex, setTextIndex] = useState(0);
+  const [textIndex, setTextIndex] = useState(
+    Math.floor(Math.random() * texts.length) + 1
+  );
 
   const displayText = useMemo(() => texts[textIndex], [textIndex]);
 

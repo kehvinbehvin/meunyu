@@ -11,10 +11,10 @@ export default function NavBar() {
   const router = useRouter();
 
   const routes = [
-    { path: 'feed', icon: photo },
-    { path: 'journey', icon: couple },
-    { path: 'schedule', icon: schedule },
-    { path: 'message', icon: message },
+    { path: '/feed', icon: photo },
+    { path: '/journey', icon: couple },
+    { path: '/schedule', icon: schedule },
+    { path: '/message', icon: message },
   ];
 
   return (
