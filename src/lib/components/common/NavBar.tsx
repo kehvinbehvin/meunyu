@@ -20,7 +20,7 @@ export default function NavBar() {
   return (
     <Flex
       position="fixed"
-      maxW="300px"
+      maxW="500px"
       bottom={0}
       left="50%"
       transform="translateX(-50%)"

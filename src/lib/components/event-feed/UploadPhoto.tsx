@@ -93,7 +93,7 @@ export default function UploadPhoto() {
   return (
     <AnimatePresence>
       <Box
-        maxW="300px"
+        maxW="500px"
         mx="auto"
         as={motion.div}
         display="flex"

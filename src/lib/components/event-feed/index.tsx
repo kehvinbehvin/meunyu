@@ -13,13 +13,17 @@ export default function EventFeed() {
         <TabList justifyContent="center">
           <Tab
             textTransform="uppercase"
-            _selected={{ color: 'brand.200', fontWeight: 'extrabold' }}
+            color="brand.200"
+            fontWeight="extrabold"
+            _selected={{ color: 'green.800' }}
           >
             Popular
           </Tab>
           <Tab
             textTransform="uppercase"
-            _selected={{ color: 'brand.200', fontWeight: 'extrabold' }}
+            color="brand.200"
+            fontWeight="extrabold"
+            _selected={{ color: 'green.800' }}
           >
             Latest
           </Tab>
