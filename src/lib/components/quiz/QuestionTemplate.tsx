@@ -1,4 +1,5 @@
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 
@@ -31,16 +32,14 @@ export default function QuestionTemplate({
     setHasAnswered(false);
   };
   return (
-    <Box textAlign="center" color="brand.300" my={9}>
-      <Heading
-        textTransform="uppercase"
-        color="brand.300"
-        fontWeight="light"
-        fontSize="2xl"
-      >
-        Two truths, one lie
-      </Heading>
-      <Text fontSize="sm">Guess the lie</Text>
+    <Box
+      as={motion.div}
+      textAlign="center"
+      color="brand.300"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <Flex flexDir="column" mt={5}>
         {options.map(({ value, answer }) => {
           let styles = {};
