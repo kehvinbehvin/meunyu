@@ -8,7 +8,6 @@ import { getRelativeTime } from '~/lib/utils';
 
 export default function FeedCard({ feed }: { feed: FeedItem }) {
   const [isLiked, setIsLiked] = useState(false);
-  console.log(feed)
   return (
     <Box
       bg="rgba(127, 130, 107, 0.5)"

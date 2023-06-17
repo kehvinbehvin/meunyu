@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import {
   Box,
-  Button,
   Flex,
   Heading,
   Icon,
@@ -243,6 +242,7 @@ export default function UploadPhoto() {
                     mx="auto"
                     fontSize="md"
                     placeholder="Write a caption for the photo"
+                    _placeholder={{ color: 'brand.300', opacity: 0.2 }}
                   />
                   <Flex>
                     <PrimaryButton
