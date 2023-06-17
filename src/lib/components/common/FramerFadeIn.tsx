@@ -6,10 +6,9 @@ export default function FramerFadeIn({ children }: { children: ReactNode }) {
   return (
     <Box
       as={motion.div}
-      initial={{ opacity: 0, transform: 'translateY(-10px)' }}
+      initial={{ opacity: 0, transform: 'translateY(-5px)' }}
       animate={{ opacity: 1, transform: 'translateY(0)' }}
       exit={{ opacity: 0 }}
-      transition={{ delay: '500s' }}
     >
       {children}
     </Box>
