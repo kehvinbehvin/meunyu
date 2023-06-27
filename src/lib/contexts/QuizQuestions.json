@@ -17,35 +17,18 @@
     ]
   },
   {
-    "explanation": "She is crazy!!",
+    "explanation": "The only time she's been in a pool is to get baptised!",
     "options": [
       {
-        "value": "Eunyu ate horsemeat once on holiday",
+        "value": "Eunyu went to 4 different primary schools",
         "answer": false
       },
       {
-        "value": "Eunyu dislikes Mochi",
-        "answer": true
-      },
-      {
-        "value": "Eunyu bungee jumped off a building before",
-        "answer": false
-      }
-    ]
-  },
-  {
-    "explanation": "What is matt's favourite colour?",
-    "options": [
-      {
-        "value": "Yellow",
+        "value": "Eunyu used to sell kimchi to her friends in secondary school",
         "answer": false
       },
       {
-        "value": "Blue",
-        "answer": false
-      },
-      {
-        "value": "Green",
+        "value": "Eunyu used to be a competitive swimmer in UK",
         "answer": true
       }
     ]

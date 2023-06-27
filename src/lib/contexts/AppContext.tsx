@@ -15,7 +15,7 @@ const AppContext = createContext({} as AppContextType);
 // Create a provider component
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const delayCloseLoading = async (delay = 5000) => {
+  const delayCloseLoading = async (delay = 2000) => {
     setTimeout(() => setIsLoading(false), delay);
   };
 
