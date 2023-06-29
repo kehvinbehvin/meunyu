@@ -3,8 +3,8 @@ import GuestList from './GuestList.json';
 export class UserRepository {
   guestList: User[];
 
-  constructor() {
-    this.guestList = GuestList;
+  constructor(guestData: any) {
+    this.guestList = guestData;
   }
 
   getUser(id: string): User | undefined {
@@ -12,4 +12,4 @@ export class UserRepository {
   }
 }
 
-export const userRepository = new UserRepository();
+export const userRepository = new UserRepository(GuestList);
