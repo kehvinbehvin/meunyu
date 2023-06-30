@@ -27,13 +27,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
-      <Layout>
-        <AppContextProvider>
-          <FeedContextProvider>
+      <AppContextProvider>
+        <FeedContextProvider>
+          <Layout>
             <Component {...pageProps} />
-          </FeedContextProvider>
-        </AppContextProvider>
-      </Layout>
+          </Layout>
+        </FeedContextProvider>
+      </AppContextProvider>
     </Chakra>
   );
 };

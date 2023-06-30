@@ -1,6 +1,8 @@
 import { Box } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
+import LoginModal from '../components/auth/LoginModal';
+
 import Header from './Header';
 
 type LayoutProps = {
@@ -22,6 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
       mb={9}
       pos="relative"
     >
+      <LoginModal />
       <Header />
       <Box as="main" py={5} w="90%" mx="auto">
         {children}

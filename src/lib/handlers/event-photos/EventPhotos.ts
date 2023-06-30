@@ -21,7 +21,7 @@ const postEventPhotos = (router: any) => {
 }
 
 const getEventPhotos = (router: any) => {
-    router.get(checkUser, async (req: NextApiRequest, res: NextApiResponse) => {
+    router.get(async (req: NextApiRequest, res: NextApiResponse) => {
         const files = await loadImages({range: 1})
         res.json({ data: files})
     })
