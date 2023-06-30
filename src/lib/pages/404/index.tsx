@@ -1,48 +1,22 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Text,
-  Link as ChakraLink,
-  useColorMode,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, Heading, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
 
-const Page404 = () => {
-  const { colorMode } = useColorMode();
+import PrimaryButton from '~/lib/components/common/PrimaryButton';
 
+const Page404 = () => {
   return (
     <Flex minHeight="70vh" direction="column" justifyContent="center">
       <NextSeo title="404 Not Found" />
-      <Text textAlign="center" fontSize="xs" color="gray">
-        <ChakraLink
-          href="https://stories.freepik.com/web"
-          isExternal
-          rel="noopener noreferrer"
-        >
-          Illustration by Freepik Stories
-        </ChakraLink>
-      </Text>
-
       <Box marginY={4}>
         <Heading textAlign="center" size="lg">
-          Page not Found.
+          Page not found
         </Heading>
 
         <Box textAlign="center" marginTop={4}>
-          <Text fontSize="sm" color="gray">
-            It&apos;s Okay!
-          </Text>
-          <Button
-            as={Link}
-            href="/"
-            backgroundColor={colorMode === 'light' ? 'gray.300' : 'teal.500'}
-            size="sm"
-          >
+          <PrimaryButton as={Link} href="/feed" size="sm">
             Let&apos;s Head Back
-          </Button>
+          </PrimaryButton>
         </Box>
       </Box>
     </Flex>

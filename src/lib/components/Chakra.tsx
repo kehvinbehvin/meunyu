@@ -1,4 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
+import '@fontsource/cormorant-garamond';
+import '@fontsource/gotu';
 
 import customTheme from '~/lib/styles/theme/index';
 

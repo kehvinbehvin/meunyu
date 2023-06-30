@@ -2,16 +2,14 @@ import { Flex } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
 
 import NavBar from '~/lib/components/common/NavBar';
-import Quiz from '~/lib/components/quiz';
+import Schedule from '~/lib/components/schedule';
 
-function QuizPage() {
+export default function SchedulePage() {
   return (
     <Flex flexDir="column">
-      <NextSeo title="Two truth one lie" />
-      <Quiz />
+      <NextSeo title="Schedule" />
       <NavBar />
+      <Schedule />
     </Flex>
   );
 }
-
-export default QuizPage;
