@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { faker } from '@faker-js/faker';
 import * as identicon from 'identicon';
 import { useEffect, createContext, useState, useContext } from 'react';
 import type { ReactNode } from 'react';
