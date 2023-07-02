@@ -13,6 +13,7 @@ type FeedContextType = {
 };
 
 export type FeedItem = {
+  id: number;
   url: string;
   author: string;
   caption: string;
@@ -50,9 +51,8 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(showLoading);
     const fetchedFeed = await (await fetch('/api/event-photo')).json();
     const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
-      const avatar = await generateAvatar(_feed.url);
+      const avatar = await generateAvatar(_feed.User.name);
       return {
-        author: faker.person.firstName(),
         ..._feed,
         avatar,
       };

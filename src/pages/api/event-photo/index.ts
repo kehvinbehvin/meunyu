@@ -1,7 +1,7 @@
 /* eslint-disable */
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
-import registerEventPhotoRoutes from "../../lib/handlers/event-photos/EventPhotos"
+import registerEventPhotoRoutes from "../../../lib/handlers/event-photos/EventPhotos"
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
@@ -16,7 +16,7 @@ export default router.handler({
         });
     },
 });
-    
+
 export const config = {
     api: {
         bodyParser: false, // Disallow body parsing, consume as stream

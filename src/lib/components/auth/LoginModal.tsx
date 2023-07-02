@@ -38,11 +38,11 @@ export default function LoginModal() {
   const options = useMemo(() => {
     return allUsers.length
       ? allUsers.map((user) => ({
-        value: user.slug,
-        label: user.connection
-          ? `${user.name} (${user.connection})`
-          : user.name,
-      }))
+          value: user.slug,
+          label: user.connection
+            ? `${user.name} (${user.connection})`
+            : user.name,
+        }))
       : [];
   }, [allUsers]);
 
