@@ -1,6 +1,8 @@
 type User = {
-  id: string;
+  id: number;
+  slug: string;
   name: string;
+  connection: string;
   attendance: {
     church: boolean;
     dinner: boolean;

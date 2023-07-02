@@ -13,6 +13,7 @@ type AppContextType = {
   triggerModal: number;
   activeLoginModal: () => void;
   authGuard: (callback: any) => any;
+  allUsers: User[];
 };
 
 // Create the context
@@ -27,6 +28,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     loggedIn: true, // defaulted as true to prevent login modal from flashing
     user: null,
   });
+  const [allUsers, setAllUsers] = useState([]);
   const delayCloseLoading = async (delay = 2000) => {
     setTimeout(() => setIsLoading(false), delay);
   };
@@ -41,6 +43,11 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('user', JSON.stringify(user));
   };
 
+  const getAllUsers = async () => {
+    const users = await (await fetch('/api/user/all')).json();
+    setAllUsers(users);
+  };
+
   const getUser = async () => {
     if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user') as string);
@@ -51,6 +58,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         login(userId as string);
       } else {
         setAuth({ loggedIn: false, user: null });
+        getAllUsers();
       }
     }
   };
@@ -82,6 +90,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         triggerModal,
         activeLoginModal,
         authGuard,
+        allUsers,
       }}
     >
       {children}

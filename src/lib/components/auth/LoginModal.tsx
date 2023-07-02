@@ -9,14 +9,14 @@ import {
   Text,
   Heading,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Select from 'react-select';
 
 import PrimaryButton from '../common/PrimaryButton';
 import { useAppContext } from '~/lib/contexts/AppContext';
 
 export default function LoginModal() {
-  const { auth, isLoading, login, triggerModal } = useAppContext();
+  const { auth, isLoading, login, triggerModal, allUsers } = useAppContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedOption, setSelectedOption] = useState<{
     value: string;
@@ -35,11 +35,16 @@ export default function LoginModal() {
     }
   }, [triggerModal]);
 
-  const options = [
-    { value: 'kevin-123', label: 'Kevin' },
-    { value: 'garei-123', label: 'Garei' },
-    { value: 'zach-123', label: 'Zach' },
-  ];
+  const options = useMemo(() => {
+    return allUsers.length
+      ? allUsers.map((user) => ({
+        value: user.slug,
+        label: user.connection
+          ? `${user.name} (${user.connection})`
+          : user.name,
+      }))
+      : [];
+  }, [allUsers]);
 
   const loginButtonHandler = () => {
     if (selectedOption) {
@@ -54,8 +59,8 @@ export default function LoginModal() {
       <ModalContent bg="#FFFFF5" color="brand.200">
         <ModalCloseButton />
         <ModalBody mt={9}>
-          <Heading fontSize="lg" textAlign="center" mb={3}>
-            Log in for full access to the website.
+          <Heading fontSize="lg" textAlign="center" mb={4} mt={4}>
+            Sign in for full access to the site
           </Heading>
 
           <Select

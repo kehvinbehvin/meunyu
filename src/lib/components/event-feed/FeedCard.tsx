@@ -1,6 +1,6 @@
 import { Flex, Icon, Image, Box, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 
 import { useAppContext } from '~/lib/contexts/AppContext';
@@ -10,6 +10,12 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
   const [isLiked, setIsLiked] = useState(false);
   const { activeLoginModal, auth } = useAppContext();
 
+  useEffect(() => {
+    if (feed.likes && auth.user) {
+      setIsLiked(feed.likes.includes(auth.user.id));
+    }
+  }, [feed, auth]);
+
   const likeHandler = () => {
     if (auth.loggedIn) {
       setIsLiked(!isLiked);
@@ -17,6 +23,7 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
       activeLoginModal();
     }
   };
+
   return (
     <Box
       bg="rgba(127, 130, 107, 0.5)"
@@ -49,7 +56,7 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
         </Flex>
         <Flex
           alignItems="center"
-          color={isLiked ? 'grey' : 'red.500'}
+          color={isLiked ? 'red.500' : 'grey'}
           px={2}
           py={1}
           borderRadius={4}

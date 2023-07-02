@@ -1,15 +1,28 @@
-import GuestList from './GuestList.json';
+import type { SupabaseClient } from '@supabase/supabase-js';
+
+import { intialiseDB } from '../../clients/supabase';
 
 export class UserRepository {
-  guestList: User[];
+  supabase: SupabaseClient;
 
-  constructor(guestData: any) {
-    this.guestList = guestData;
+  constructor() {
+    this.supabase = intialiseDB();
   }
 
-  getUser(id: string): User | undefined {
-    return this.guestList.find((guest) => guest.id === id);
+  async getUser(slug: string) {
+    const { data } = await this.supabase
+      .from('User')
+      .select('*')
+      .eq('slug', slug);
+    return data ? data[0] : undefined;
+  }
+
+  async getAllSlugs() {
+    const { data } = await this.supabase
+      .from('User')
+      .select('name, connection, slug');
+    return data;
   }
 }
 
-export const userRepository = new UserRepository(GuestList);
+export const userRepository = new UserRepository();
