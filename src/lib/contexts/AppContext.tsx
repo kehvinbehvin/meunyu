@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { createContext, useState, useContext, useEffect } from 'react';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
+import { apiService } from '../api-service';
+
 // Define the type for your context data
 type AppContextType = {
   isLoading: boolean;
@@ -33,18 +35,14 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setTimeout(() => setIsLoading(false), delay);
   };
 
-  const fetchUser = async (userId: string): Promise<User> => {
-    return (await fetch(`/api/user/${userId}`)).json();
-  };
-
   const login = async (userId: string) => {
-    const user = await fetchUser(userId as string);
+    const user = await apiService.getUser(userId as string);
     setAuth({ loggedIn: true, user });
     localStorage.setItem('user', JSON.stringify(user));
   };
 
   const getAllUsers = async () => {
-    const users = await (await fetch('/api/user/all')).json();
+    const users = await apiService.getUsers();
     setAllUsers(users);
   };
 
@@ -62,6 +60,13 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   };
+
+  // add jwt token to api interceptor
+  useEffect(() => {
+    if (auth.user) {
+      apiService.addJWTToken(auth.user.token);
+    }
+  }, [auth]);
 
   const activeLoginModal = () => {
     setTriggerModal(triggerModal + 1);

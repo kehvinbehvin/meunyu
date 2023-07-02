@@ -11,7 +11,11 @@ export const saveImages = async (files: Array<any>) => {
   });
 
   try {
-    const { data } = await supabase.from('Image').insert(payload).select('*');
+    const { data, error } = await supabase
+      .from('Image')
+      .insert(payload)
+      .select('*');
+    console.log('error', error);
     console.log('Images saved');
     return data;
   } catch (error) {
@@ -21,10 +25,12 @@ export const saveImages = async (files: Array<any>) => {
 
 export const likeImage = async (authorId: number, imageId: number) => {
   try {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('Like')
       .insert({ author_id: authorId, image_id: imageId })
       .select();
+
+    console.log('error', error);
 
     return data;
   } catch (err) {
@@ -32,15 +38,20 @@ export const likeImage = async (authorId: number, imageId: number) => {
   }
 };
 
-export const loadImages = async (filters: any) => {
-  const range = filters.range;
-
+export const loadImages = async ({
+  offset,
+  limit,
+}: {
+  offset: number;
+  limit: number;
+}) => {
   try {
     const { data } = await supabase
       .from('Image')
       .select('created_at, fid, url, User( name ), Like( author_id )')
       .eq('status', 'Approved')
-      .eq('deleted', false);
+      .eq('deleted', false)
+      .range(offset, offset + limit);
 
     return data?.map((image) => ({
       ...image,

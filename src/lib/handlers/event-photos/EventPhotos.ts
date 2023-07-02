@@ -1,6 +1,6 @@
 /* eslint-disable */
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { saveImages, loadImages } from './EventPhotosManager';
+import { saveImages, loadImages, likeImage } from './EventPhotosManager';
 import { multerMiddleware } from '../../clients/multer';
 import { checkUser } from '../middleware/auth';
 
@@ -15,10 +15,13 @@ const postEventPhotos = (router: any) => {
     multerMiddleware,
     async (req: any, res: NextApiResponse) => {
       if (req.files.length === 0) {
-        res.json({ data: [] });
+        res.status(400).json({ error: 'No file detected' });
       } else {
-        const savedFiles = await saveImages(req.files);
-        res.json({ data: savedFiles });
+        const images = await saveImages(req.files);
+        if (images && images.length > 0) {
+          await likeImage(req.user.id, images[0].fid);
+        }
+        res.json(images);
       }
     }
   );
@@ -26,7 +29,8 @@ const postEventPhotos = (router: any) => {
 
 const getEventPhotos = (router: any) => {
   router.get(async (req: NextApiRequest, res: NextApiResponse) => {
-    const files = await loadImages({ range: 1 });
+    const { limit = '20', offset = '0' } = req.query;
+    const files = await loadImages({ limit: +limit, offset: +offset });
     res.json({ data: files });
   });
 };

@@ -3,6 +3,7 @@ type User = {
   slug: string;
   name: string;
   connection: string;
+  token: string;
   attendance: {
     church: boolean;
     dinner: boolean;

@@ -3,6 +3,8 @@ import * as identicon from 'identicon';
 import { useEffect, createContext, useState, useContext } from 'react';
 import type { ReactNode } from 'react';
 
+import { apiService } from '../api-service';
+
 import { useAppContext } from './AppContext';
 
 // Define the type for your context data
@@ -12,7 +14,7 @@ type FeedContextType = {
 };
 
 export type FeedItem = {
-  id: number;
+  fid: number;
   url: string;
   author: string;
   caption: string;
@@ -48,7 +50,7 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
    */
   const getFeed = async (showLoading = true) => {
     setIsLoading(showLoading);
-    const fetchedFeed = await (await fetch('/api/event-photo')).json();
+    const fetchedFeed = await apiService.getFeed();
     const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
       const avatar = await generateAvatar(_feed.User.name);
       return {
@@ -65,12 +67,7 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
    * Upload image to server
    */
   const uploadFeed = async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    await fetch('/api/event-photo', {
-      method: 'POST',
-      body: formData,
-    });
+    await apiService.uploadPhoto(file);
     await getFeed();
   };
 

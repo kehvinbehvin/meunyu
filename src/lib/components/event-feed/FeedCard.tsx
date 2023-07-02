@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 
+import { apiService } from '~/lib/api-service';
 import { useAppContext } from '~/lib/contexts/AppContext';
 import type { FeedItem } from '~/lib/contexts/FeedContext';
 
@@ -17,8 +18,9 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
   }, [feed, auth]);
 
   const likeHandler = () => {
-    if (auth.loggedIn) {
+    if (auth.user?.id) {
       setIsLiked(!isLiked);
+      apiService.likePhoto(feed.fid);
     } else {
       activeLoginModal();
     }
@@ -65,7 +67,7 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
         >
           <Icon as={FaHeart} mr={2} fontSize="xs" />
           <Text fontSize="md" color="white">
-            {feed.likes?.length || 1}
+            {feed.likes?.length || 1 + (isLiked ? 1 : 0)}
           </Text>
         </Flex>
       </Flex>
