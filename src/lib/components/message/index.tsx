@@ -1,15 +1,21 @@
 import { Heading, Box, Image, Text } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
 import { useAppContext } from '~/lib/contexts/AppContext';
 
 export default function Message() {
-  const {
-    auth: { user },
-  } = useAppContext();
+  const { auth, activeLoginModal } = useAppContext();
+
+  useEffect(() => {
+    if (!auth.loggedIn) {
+      activeLoginModal();
+    }
+  }, []);
+
   return (
     <FramerFadeIn>
-      {user && (
+      {auth.user && (
         <Box textAlign="center">
           <Heading
             color="brand.300"
@@ -36,7 +42,7 @@ export default function Message() {
           </Box>
           <Box>
             <Heading color="brand.300" fontWeight="light" my={3}>
-              Dearest {user.name},
+              Dearest {auth.user.name},
             </Heading>
             <Text fontSize="xs" color="brand.300">
               Your kind words, well wishes, and thoughtful gestures touched our

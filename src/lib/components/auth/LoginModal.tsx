@@ -16,17 +16,24 @@ import PrimaryButton from '../common/PrimaryButton';
 import { useAppContext } from '~/lib/contexts/AppContext';
 
 export default function LoginModal() {
-  const { auth, isLoading, login } = useAppContext();
+  const { auth, isLoading, login, triggerModal } = useAppContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedOption, setSelectedOption] = useState<{
     value: string;
     label: string;
   } | null>(null);
+
   useEffect(() => {
     if (!auth.loggedIn && !isLoading) {
       setTimeout(() => onOpen(), 750);
     }
   }, [auth, isLoading]);
+
+  useEffect(() => {
+    if (!auth.loggedIn && !isLoading) {
+      onOpen();
+    }
+  }, [triggerModal]);
 
   const options = [
     { value: 'kevin-123', label: 'Kevin' },

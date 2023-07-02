@@ -3,10 +3,20 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 
+import { useAppContext } from '~/lib/contexts/AppContext';
 import type { FeedItem } from '~/lib/contexts/FeedContext';
 
 export default function FeedCard({ feed }: { feed: FeedItem }) {
   const [isLiked, setIsLiked] = useState(false);
+  const { activeLoginModal, auth } = useAppContext();
+
+  const likeHandler = () => {
+    if (auth.loggedIn) {
+      setIsLiked(!isLiked);
+    } else {
+      activeLoginModal();
+    }
+  };
   return (
     <Box
       bg="rgba(127, 130, 107, 0.5)"
@@ -44,7 +54,7 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
           py={1}
           borderRadius={4}
           transition="all 100ms ease-in"
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={likeHandler}
         >
           <Icon as={FaHeart} mr={2} fontSize="xs" />
           <Text fontSize="md" color="white">

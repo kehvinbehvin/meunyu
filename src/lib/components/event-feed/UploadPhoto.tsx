@@ -16,6 +16,7 @@ import { BsArrowUpCircleFill } from 'react-icons/bs';
 import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
 
 import PrimaryButton from '../common/PrimaryButton';
+import { useAppContext } from '~/lib/contexts/AppContext';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
 
 const formStateEnum = {
@@ -29,6 +30,7 @@ export default function UploadPhoto() {
   const [formState, setFormState] = useState(formStateEnum.UNOPENED);
   const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef(null);
+  const { auth, activeLoginModal } = useAppContext();
   const { uploadFeed } = useFeedContext();
 
   const submitHandler = async () => {
@@ -118,7 +120,13 @@ export default function UploadPhoto() {
             color="white"
             w="20px"
             h="20px"
-            onClick={() => setFormState(formStateEnum.OPENED)}
+            onClick={() => {
+              if (auth.loggedIn) {
+                setFormState(formStateEnum.OPENED);
+              } else {
+                activeLoginModal();
+              }
+            }}
           />
         )}
         {formState === formStateEnum.SUBMITTING && (

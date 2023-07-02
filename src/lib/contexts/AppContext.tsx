@@ -10,6 +10,9 @@ type AppContextType = {
   delayCloseLoading: (delay?: number) => Promise<void>;
   auth: { loggedIn: boolean; user: User | null };
   login: (userId: string) => void;
+  triggerModal: number;
+  activeLoginModal: () => void;
+  authGuard: (callback: any) => any;
 };
 
 // Create the context
@@ -18,6 +21,7 @@ const AppContext = createContext({} as AppContextType);
 // Create a provider component
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [triggerModal, setTriggerModal] = useState(0);
   const router = useRouter();
   const [auth, setAuth] = useState<{ loggedIn: boolean; user: User | null }>({
     loggedIn: true, // defaulted as true to prevent login modal from flashing
@@ -51,13 +55,34 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const activeLoginModal = () => {
+    setTriggerModal(triggerModal + 1);
+  };
+
+  const authGuard = (callback: () => unknown) => {
+    if (auth.loggedIn) {
+      callback();
+    } else {
+      setTriggerModal(triggerModal + 1);
+    }
+  };
+
   useEffect(() => {
     getUser();
   }, []);
 
   return (
     <AppContext.Provider
-      value={{ isLoading, setIsLoading, delayCloseLoading, auth, login }}
+      value={{
+        isLoading,
+        setIsLoading,
+        delayCloseLoading,
+        auth,
+        login,
+        triggerModal,
+        activeLoginModal,
+        authGuard,
+      }}
     >
       {children}
     </AppContext.Provider>
