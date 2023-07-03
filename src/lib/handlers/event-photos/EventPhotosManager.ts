@@ -63,3 +63,27 @@ export const loadImages = async ({
     console.error(error);
   }
 };
+
+/**
+ * Called by admin to retrieve images that are yet to confirmed
+ */
+export const getPendingImages = async () => {
+  const { data, error } = await supabase
+    .from('Image')
+    .select('*, User(name)')
+    .eq('status', 'Pending');
+
+  if (error) console.log(error);
+  return data;
+};
+
+/**
+ * Called by admin to approve image
+ */
+export const approveImage = async (imageId: number) => {
+  const { error } = await supabase
+    .from('Image')
+    .update({ status: 'Approved' })
+    .eq('fid', imageId);
+  if (error) console.log(error)
+};

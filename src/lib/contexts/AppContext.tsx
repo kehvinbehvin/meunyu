@@ -37,6 +37,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (userId: string) => {
     const user = await apiService.getUser(userId as string);
+    apiService.addJWTToken(user.token);
     setAuth({ loggedIn: true, user });
     localStorage.setItem('user', JSON.stringify(user));
   };
@@ -49,6 +50,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const getUser = async () => {
     if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user') as string);
+      apiService.addJWTToken(user.token);
       setAuth({ loggedIn: true, user });
     } else {
       const { userId } = router.query;
@@ -60,13 +62,6 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   };
-
-  // add jwt token to api interceptor
-  useEffect(() => {
-    if (auth.user) {
-      apiService.addJWTToken(auth.user.token);
-    }
-  }, [auth]);
 
   const activeLoginModal = () => {
     setTriggerModal(triggerModal + 1);

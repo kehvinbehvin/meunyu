@@ -40,6 +40,24 @@ class ApiService {
   likePhoto(imageId: number) {
     return this.api.post(`/event-photo/${imageId}/like`);
   }
+
+  async getPendingImages() {
+    const { data } = await this.api.get('/event-photo/all');
+    return data;
+  }
+
+  async approveImage(id: number) {
+    await this.api.post(`/event-photo/${id}/approve`);
+  }
+
+  async setShowMessage(showMessages: boolean) {
+    await this.api.post(`/message/toggle-display`, { showMessages });
+  }
+
+  async getShowMessage() {
+    const { data } = await this.api.get('/message/toggle-display');
+    return data;
+  }
 }
 
 export const apiService = new ApiService();
