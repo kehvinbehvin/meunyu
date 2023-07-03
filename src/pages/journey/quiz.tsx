@@ -1,3 +1,3 @@
-import QuizPage from '~/lib/pages/quiz';
+import QuizPage from '~/lib/pages/journey/quiz';
 
 export default QuizPage;
