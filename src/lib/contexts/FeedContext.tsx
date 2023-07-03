@@ -1,8 +1,11 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { faker } from '@faker-js/faker';
 import * as identicon from 'identicon';
 import { useEffect, createContext, useState, useContext } from 'react';
 import type { ReactNode } from 'react';
+
+import { apiService } from '../api-service';
+
+import { useAppContext } from './AppContext';
 
 // Define the type for your context data
 type FeedContextType = {
@@ -11,6 +14,7 @@ type FeedContextType = {
 };
 
 export type FeedItem = {
+  fid: number;
   url: string;
   author: string;
   caption: string;
@@ -24,6 +28,7 @@ const FeedContext = createContext({} as FeedContextType);
 
 // Create a provider component
 const FeedContextProvider = ({ children }: { children: ReactNode }) => {
+  const { delayCloseLoading, setIsLoading } = useAppContext();
   const [feed, setFeed] = useState<FeedItem[]>([]);
 
   const generateAvatar = (author: string): Promise<HTMLImageElement> => {
@@ -43,30 +48,26 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
   /**
    * Fetch feed from server
    */
-  const getFeed = async () => {
-    const fetchedFeed = await (await fetch('/api/event-photo')).json();
+  const getFeed = async (showLoading = true) => {
+    setIsLoading(showLoading);
+    const fetchedFeed = await apiService.getFeed();
     const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
-      const avatar = await generateAvatar(_feed.url);
+      const avatar = await generateAvatar(_feed.User.name);
       return {
-        author: faker.person.firstName(),
         ..._feed,
         avatar,
       };
     });
 
     setFeed(await Promise.all(feedWithAvatar));
+    delayCloseLoading();
   };
 
   /**
    * Upload image to server
    */
   const uploadFeed = async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    await fetch('/api/event-photo', {
-      method: 'POST',
-      body: formData,
-    });
+    await apiService.uploadPhoto(file);
     await getFeed();
   };
 

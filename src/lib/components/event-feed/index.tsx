@@ -1,5 +1,6 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
+import FramerFadeIn from '../common/FramerFadeIn';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
 
 import FeedCard from './FeedCard';
@@ -9,31 +10,12 @@ export default function EventFeed() {
   const { feed } = useFeedContext();
   return (
     <Box>
-      <Tabs>
-        <TabList justifyContent="center">
-          <Tab
-            textTransform="uppercase"
-            _selected={{ color: 'brand.200', fontWeight: 'extrabold' }}
-          >
-            Popular
-          </Tab>
-          <Tab
-            textTransform="uppercase"
-            _selected={{ color: 'brand.200', fontWeight: 'extrabold' }}
-          >
-            Latest
-          </Tab>
-        </TabList>
-
-        <TabPanels>
-          <TabPanel>
-            {feed && feed.map((feedItem) => <FeedCard feed={feedItem} />)}
-          </TabPanel>
-          <TabPanel>
-            {feed && feed.map((feedItem) => <FeedCard feed={feedItem} />)}
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <FramerFadeIn>
+        {feed &&
+          feed.map((feedItem) => (
+            <FeedCard key={feedItem.created_at} feed={feedItem} />
+          ))}
+      </FramerFadeIn>
 
       <UploadPhoto />
     </Box>

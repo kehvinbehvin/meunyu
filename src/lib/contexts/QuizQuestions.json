@@ -1,51 +1,34 @@
 [
   {
-    "question": "What is matt's favourite colour?",
+    "explanation": "We all know it, Matt skips cardio",
     "options": [
       {
-        "value": "Yellow",
+        "value": "Matt once gave up his seat for a pregnant lady on the train but she was not pregnant",
         "answer": false
       },
       {
-        "value": "Blue",
+        "value": "Matt can speak 4 languages",
         "answer": false
       },
       {
-        "value": "Green",
+        "value": "Matt once ran a full marathon and finished top 10 in the U18 category",
         "answer": true
       }
     ]
   },
   {
-    "question": "What is Eunyu's favourite food?",
+    "explanation": "The only time she's been in a pool is to get baptised!",
     "options": [
       {
-        "value": "Horsemeat",
+        "value": "Eunyu went to 4 different primary schools",
         "answer": false
       },
       {
-        "value": "Mochi",
-        "answer": true
-      },
-      {
-        "value": "Ginger tea",
-        "answer": false
-      }
-    ]
-  },
-  {
-    "question": "What is matt's favourite colour?",
-    "options": [
-      {
-        "value": "Yellow",
+        "value": "Eunyu used to sell kimchi to her friends in secondary school",
         "answer": false
       },
       {
-        "value": "Blue",
-        "answer": false
-      },
-      {
-        "value": "Green",
+        "value": "Eunyu used to be a competitive swimmer in UK",
         "answer": true
       }
     ]

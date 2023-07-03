@@ -19,14 +19,14 @@ const upload = multer({
     },
     limits: {
         fields: 1,
-        fieldSize: 20000, //TODO: Check if this size is enough
-        fileSize: 150000, // 150 KB for a 1080x1080 JPG 90
+        fieldSize: 20000, // TODO: Check if this size is enough
+        fileSize: 150000000, // 150 KB for a 1080x1080 JPG 90
     },
 });
 
 const checkFileType = (file: any, cb: Function) => {
     const extTypes = ['png','jpg','jpeg']
-    const mimeTypes = ['image/png','image/jpg','image/jpeg'] 
+    const mimeTypes = ['image/png','image/jpg','image/jpeg']
 
     const fileName = file.originalname.toLowerCase()
     const fileExt = fileName.substring(fileName.lastIndexOf('.')+1, fileName.length) || fileName;

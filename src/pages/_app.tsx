@@ -5,6 +5,7 @@ import { DefaultSeo } from 'next-seo';
 
 import defaultSEOConfig from '../../next-seo.config';
 import { Chakra } from '~/lib/components/Chakra';
+import { AppContextProvider } from '~/lib/contexts/AppContext';
 import { FeedContextProvider } from '~/lib/contexts/FeedContext';
 import Layout from '~/lib/layout';
 
@@ -18,13 +19,21 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
+        <meta name="theme-color" content="#CACAB4" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
-      <Layout>
+      <AppContextProvider>
         <FeedContextProvider>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </FeedContextProvider>
-      </Layout>
+      </AppContextProvider>
     </Chakra>
   );
 };

@@ -11,26 +11,28 @@ export default function NavBar() {
   const router = useRouter();
 
   const routes = [
-    { path: 'feed', icon: photo },
-    { path: 'journey', icon: couple },
-    { path: 'schedule', icon: schedule },
-    { path: 'mailbox', icon: message },
+    { path: '/feed', icon: photo },
+    { path: '/journey', icon: couple },
+    { path: '/schedule', icon: schedule },
+    { path: '/message', icon: message },
   ];
 
   return (
     <Flex
       position="fixed"
+      maxW="500px"
       bottom={0}
-      right={0}
+      left="50%"
+      transform="translateX(-50%)"
       w="100vw"
-      bg="white"
+      bg="brand.200"
       zIndex={2}
       py={3}
       h="50px"
       justifyContent="space-around"
     >
       {routes.map((route) => (
-        <Link href={route.path}>
+        <Link href={route.path} key={route.path}>
           <Box>
             <Image
               src={route.icon.src}
@@ -41,7 +43,7 @@ export default function NavBar() {
             <Box
               w="3px"
               h="3px"
-              bgColor="blue.500"
+              bgColor="white"
               mx="auto"
               borderRadius="500px"
               mt={1}

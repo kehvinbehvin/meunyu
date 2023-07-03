@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import {
   Box,
-  Button,
   Flex,
+  Heading,
   Icon,
   Image,
   Text,
@@ -15,6 +15,8 @@ import { BiCloudUpload } from 'react-icons/bi';
 import { BsArrowUpCircleFill } from 'react-icons/bs';
 import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
 
+import PrimaryButton from '../common/PrimaryButton';
+import { useAppContext } from '~/lib/contexts/AppContext';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
 
 const formStateEnum = {
@@ -28,6 +30,7 @@ export default function UploadPhoto() {
   const [formState, setFormState] = useState(formStateEnum.UNOPENED);
   const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef(null);
+  const { auth, activeLoginModal } = useAppContext();
   const { uploadFeed } = useFeedContext();
 
   const submitHandler = async () => {
@@ -91,6 +94,8 @@ export default function UploadPhoto() {
   return (
     <AnimatePresence>
       <Box
+        maxW="500px"
+        mx="auto"
         as={motion.div}
         display="flex"
         position="fixed"
@@ -115,7 +120,13 @@ export default function UploadPhoto() {
             color="white"
             w="20px"
             h="20px"
-            onClick={() => setFormState(formStateEnum.OPENED)}
+            onClick={() => {
+              if (auth.loggedIn) {
+                setFormState(formStateEnum.OPENED);
+              } else {
+                activeLoginModal();
+              }
+            }}
           />
         )}
         {formState === formStateEnum.SUBMITTING && (
@@ -149,105 +160,128 @@ export default function UploadPhoto() {
             <Icon as={MdFileDownloadDone} w="20px" h="20px" />
           </Box>
         )}
-        {formState === formStateEnum.OPENED && (
-          <motion.div
-            style={{
-              backgroundColor: '#020202',
-              color: 'white',
-              position: 'fixed',
-              left: 0,
-              top: 0,
-              height: '100vh',
-              width: '100vw',
-            }}
-          >
-            <Box position="fixed" inset="0 0 0 0" bg="brand.200" color="white">
-              <Box w="80%" mx="auto">
-                <Text fontSize="3xl" textAlign="center" mt={9}>
-                  Share your special moments
-                </Text>
-                <Text
-                  fontSize="md"
-                  textAlign="center"
-                  mt={5}
-                  fontWeight="normal"
-                >
-                  Whether it&apos;s a candid shot of the happy couple or a
-                  fun-filled moment from the celebration or an unglam photo of
-                  the groom, your photos will help create a lasting treasure
-                </Text>
-                <Box
-                  mx="auto"
-                  as={motion.div}
-                  whileTap={{ scale: 0.9 }}
-                  border="1px dotted white"
-                  mt={5}
-                  width="fit-content"
-                  p={3}
-                  position="relative"
-                >
-                  {image ? (
-                    <Image
-                      src={URL.createObjectURL(image)}
-                      w="130px"
-                      h="130px"
-                    />
-                  ) : (
-                    <Icon
-                      as={BiCloudUpload}
-                      fontWeight="normal"
-                      w="130px"
-                      h="130px"
-                    />
-                  )}
-                  <label
-                    htmlFor="file-upload"
-                    className="custom-file-upload"
-                    style={{ position: 'absolute', inset: '0 0 0 0' }}
-                  />
-                  <input
-                    id="file-upload"
-                    type="file"
-                    style={{ display: 'none' }}
-                    onChange={selectImageHandler}
-                  />
-                </Box>
-              </Box>
-              <Flex
-                w="80%"
-                mx="auto"
-                mt={5}
-                flexDir="column"
-                alignItems="center"
+        <AnimatePresence>
+          {formState === formStateEnum.OPENED && (
+            <motion.div
+              style={{
+                backgroundColor: '#020202',
+                color: 'white',
+                position: 'fixed',
+                left: 0,
+                top: 0,
+                height: '100vh',
+                width: '100vw',
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Box
+                position="fixed"
+                inset="0 0 0 0"
+                bg="brand.200"
+                color="white"
               >
-                <Textarea
+                <Box w="80%" mx="auto">
+                  <Heading
+                    fontSize="3xl"
+                    textAlign="center"
+                    mt={9}
+                    textTransform="uppercase"
+                    fontWeight="light"
+                  >
+                    Share your special moments with us
+                  </Heading>
+                  <Text
+                    fontSize="sm"
+                    textAlign="center"
+                    mt={5}
+                    fontWeight="normal"
+                  >
+                    Whether it&apos;s a candid shot of the happy couple or a
+                    fun-filled moment from the celebration or an unglam photo of
+                    the groom, your photos will help create a lasting treasure
+                  </Text>
+                  <Box
+                    mx="auto"
+                    as={motion.div}
+                    whileTap={{ scale: 0.9 }}
+                    border="1px dotted white"
+                    mt={5}
+                    width="fit-content"
+                    p={3}
+                    position="relative"
+                  >
+                    {image ? (
+                      <Image
+                        src={URL.createObjectURL(image)}
+                        w="130px"
+                        h="130px"
+                      />
+                    ) : (
+                      <Icon
+                        as={BiCloudUpload}
+                        fontWeight="normal"
+                        w="130px"
+                        h="130px"
+                      />
+                    )}
+                    <label
+                      htmlFor="file-upload"
+                      className="custom-file-upload"
+                      style={{ position: 'absolute', inset: '0 0 0 0' }}
+                    />
+                    <input
+                      id="file-upload"
+                      type="file"
+                      style={{ display: 'none' }}
+                      onChange={selectImageHandler}
+                    />
+                  </Box>
+                </Box>
+                <Flex
+                  w="80%"
                   mx="auto"
-                  fontSize="md"
-                  placeholder="Write a caption for the photo"
-                />
-                <Flex>
-                  <Button
-                    w="50%"
-                    mt={5}
-                    onClick={submitHandler}
-                    variant="solid"
-                    mr={3}
-                  >
-                    Submit
-                  </Button>
-                  <Button
-                    w="50%"
-                    mt={5}
-                    onClick={cancelHandler}
-                    variant="outline"
-                  >
-                    Cancel
-                  </Button>
+                  mt={5}
+                  flexDir="column"
+                  alignItems="center"
+                >
+                  <Textarea
+                    mx="auto"
+                    fontSize="md"
+                    placeholder="Write a caption for the photo"
+                    _placeholder={{ color: 'brand.300', opacity: 0.2 }}
+                  />
+                  <Flex>
+                    <PrimaryButton
+                      w="50%"
+                      mt={5}
+                      px={5}
+                      onClick={submitHandler}
+                      variant="solid"
+                      mr={3}
+                    >
+                      Share
+                    </PrimaryButton>
+                    <PrimaryButton
+                      w="50%"
+                      bg="transparent"
+                      color="brand.300"
+                      border="1px solid"
+                      borderColor="brand.300"
+                      mt={5}
+                      px={5}
+                      onClick={cancelHandler}
+                      variant="outline"
+                    >
+                      Cancel
+                    </PrimaryButton>
+                  </Flex>
                 </Flex>
-              </Flex>
-            </Box>
-          </motion.div>
-        )}
+              </Box>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Box>
     </AnimatePresence>
   );
