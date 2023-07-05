@@ -19,6 +19,9 @@ export default function PrimaryButton({
       color="brand.200"
       fontWeight="light"
       {...rest}
+      _focus={{
+        bg: 'brand.300',
+      }}
     >
       {children}
     </Button>
