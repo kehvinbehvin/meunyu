@@ -75,7 +75,6 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
    */
   const uploadFeed = async (file: File) => {
     await apiService.uploadPhoto(file);
-    await getFeed();
   };
 
   useEffect(() => {
