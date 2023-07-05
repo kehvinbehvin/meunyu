@@ -9,16 +9,22 @@ export default function OurJourney() {
       href: '/journey/story',
       header: 'Our Story',
       subtitle: "Love's journey revealed",
+      bgImage:
+        'https://images.pixieset.com/25234906/0acd438a2b1e876b4832cc5bd50f5daf-medium.jpg',
     },
     {
       href: '/journey/gallery',
       header: 'Gallery',
       subtitle: 'Our cherished moments',
+      bgImage:
+        'https://images.pixieset.com/25234906/0b69b8da6d09f94900908e8ae5fba1a6-medium.jpg',
     },
     {
       href: '/journey/quiz',
       header: 'Two truths, One lie',
       subtitle: 'How much do you know us?',
+      bgImage:
+        'https://images.pixieset.com/25234906/8ce65f2f390407b13ea985f6aadec9e5-medium.jpg',
     },
   ];
   return (
@@ -34,9 +40,7 @@ export default function OurJourney() {
               borderRadius="500px"
               h="150px"
               my={9}
-              bgImage={
-                "url('https://images.pexels.com/photos/2403568/pexels-photo-2403568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"
-              }
+              bgImage={`url('${route.bgImage}')`}
               bgSize="cover"
               bgPos="center"
               pos="relative"
