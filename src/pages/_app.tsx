@@ -28,11 +28,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
       <AppContextProvider>
-        <FeedContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </FeedContextProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </AppContextProvider>
     </Chakra>
   );
