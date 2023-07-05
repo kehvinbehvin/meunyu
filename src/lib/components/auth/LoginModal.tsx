@@ -25,12 +25,6 @@ export default function LoginModal() {
 
   useEffect(() => {
     if (!auth.loggedIn && !isLoading) {
-      setTimeout(() => onOpen(), 750);
-    }
-  }, [auth, isLoading]);
-
-  useEffect(() => {
-    if (!auth.loggedIn && !isLoading) {
       onOpen();
     }
   }, [triggerModal]);

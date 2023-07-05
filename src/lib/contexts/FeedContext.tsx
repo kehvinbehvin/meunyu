@@ -28,8 +28,15 @@ const FeedContext = createContext({} as FeedContextType);
 
 // Create a provider component
 const FeedContextProvider = ({ children }: { children: ReactNode }) => {
-  const { delayCloseLoading, setIsLoading } = useAppContext();
+  const { delayCloseLoading, setIsLoading, auth, activeLoginModal, isLoading } =
+    useAppContext();
   const [feed, setFeed] = useState<FeedItem[]>([]);
+
+  useEffect(() => {
+    if (!auth.loggedIn && !isLoading) {
+      setTimeout(() => activeLoginModal, 750);
+    }
+  }, [auth, isLoading]);
 
   const generateAvatar = (author: string): Promise<HTMLImageElement> => {
     return new Promise((resolve, reject) => {
