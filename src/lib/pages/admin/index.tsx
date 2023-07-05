@@ -1,12 +1,4 @@
-import {
-  Box,
-  Text,
-  Image,
-  Button,
-  Switch,
-  Flex,
-  Spinner,
-} from '@chakra-ui/react';
+import { Box, Text, Image, Button, Switch, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { apiService } from '~/lib/api-service';
@@ -56,14 +48,6 @@ export default function AdminPage() {
       fetchToggle();
     }
   }, [auth]);
-
-  if (!images.length) {
-    return (
-      <Flex align="center" justify="center">
-        <Spinner />
-      </Flex>
-    );
-  }
 
   return (
     <Box>
