@@ -71,6 +71,9 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
           </Text>
         </Flex>
       </Flex>
+      <Text mt={2} color="white" fontSize="sm">
+        {feed.caption}
+      </Text>
     </Box>
   );
 }
