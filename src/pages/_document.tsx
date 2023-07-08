@@ -21,7 +21,7 @@ class MyDocument extends Document {
           />
           <Meta />
         </Head>
-        <body>
+        <body style={{ backgroundColor: '#CACAB4' }}>
           <ColorModeScript
             initialColorMode={customTheme.config?.initialColorMode}
           />

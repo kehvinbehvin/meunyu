@@ -1,14 +1,22 @@
-import { Text, Flex, Image } from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 
-import HeaderSmiley from '../../assets/header-smiley.png';
+import navbarBackground from '~/assets/navbar-background.png';
 
 const Header = () => {
   return (
-    <Flex as="header" width="full" align="center" justify="center">
-      <Text color="#F5F5F5" fontSize="xs">
+    <Flex
+      as="header"
+      width="full"
+      align="center"
+      justify="center"
+      backgroundImage={navbarBackground.src}
+      h="60px"
+      backgroundSize="cover"
+      bgRepeat="no-repeat"
+    >
+      <Heading color="#F5F5F5" fontSize="md" fontWeight="bold">
         #mattyubygrace
-      </Text>
-      <Image src={HeaderSmiley.src} pos="absolute" right={0} />
+      </Heading>
     </Flex>
   );
 };

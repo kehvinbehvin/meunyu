@@ -2,6 +2,7 @@ import { Heading, Box, Image, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
+import messagePlaceholder from '~/assets/message/message-placeholder.png';
 import { useAppContext } from '~/lib/contexts/AppContext';
 
 export default function Message() {
@@ -31,13 +32,10 @@ export default function Message() {
             borderRadius="300px"
             mt={9}
             p={3}
-            h="300px"
+            h="330px"
           >
-            <Box borderRadius="300px" overflow="hidden" h="275px">
-              <Image
-                bgPos="center center"
-                src="https://images.pexels.com/photos/16756548/pexels-photo-16756548/free-photo-of-amor-andino.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              />
+            <Box borderRadius="300px" overflow="hidden" h="300px">
+              <Image bgPos="center center" src={messagePlaceholder.src} />
             </Box>
           </Box>
           <Box>
