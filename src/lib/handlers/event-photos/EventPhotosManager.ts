@@ -48,18 +48,12 @@ export const loadImages = async ({
 }) => {
   try {
     const { data } = await supabase
-      .from('Image')
-      .select('created_at, fid, url, User( name ), Like( author_id )')
+      .rpc('load_likeby_images')
       .eq('status', 'Approved')
       .eq('deleted', false)
       .range(offset, offset + limit);
 
-    return data?.map((image) => ({
-      ...image,
-      // @ts-ignore
-      author: image.User.name,
-      likes: image.Like.map((author) => author.author_id),
-    }));
+    return data
   } catch (error) {
     console.error(error);
   }
