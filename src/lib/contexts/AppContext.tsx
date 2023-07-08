@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useRouter } from 'next/router';
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect, useMemo } from 'react';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
 import { apiService } from '../api-service';
@@ -16,6 +16,7 @@ type AppContextType = {
   activeLoginModal: () => void;
   authGuard: (callback: any) => any;
   allUsers: User[];
+  language: 'en' | 'ko';
 };
 
 // Create the context
@@ -34,6 +35,8 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const delayCloseLoading = async (delay = 2000) => {
     setTimeout(() => setIsLoading(false), delay);
   };
+
+  const language = useMemo(() => auth.user?.language || 'en', [auth]);
 
   const login = async (userId: string) => {
     const user = await apiService.getUser(userId as string);
@@ -91,6 +94,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         activeLoginModal,
         authGuard,
         allUsers,
+        language,
       }}
     >
       {children}

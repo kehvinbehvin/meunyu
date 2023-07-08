@@ -4,9 +4,14 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 
 import PrimaryButton from '../common/PrimaryButton';
+import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 
 type OptionType = {
-  value: string;
+  value: {
+    en: string;
+    ko: string;
+  };
   answer: boolean;
 };
 
@@ -16,19 +21,30 @@ export default function QuestionTemplate({
   goNextQuestion,
   setScore,
 }: {
-  explanation: string;
+  explanation: { en: string; ko: string };
   options: OptionType[];
   goNextQuestion: () => void;
   setScore: Dispatch<SetStateAction<number>>;
 }) {
+  const { language } = useAppContext();
   const [selection, setSelection] = useState<OptionType>({
-    value: '',
+    value: {
+      en: '',
+      ko: '',
+    },
     answer: false,
   });
   const [hasAnswered, setHasAnswered] = useState(false);
+  const { submit, next } = appCopy.common;
 
   const reset = () => {
-    setSelection({ value: '', answer: false });
+    setSelection({
+      value: {
+        en: '',
+        ko: '',
+      },
+      answer: false,
+    });
     setHasAnswered(false);
   };
   return (
@@ -64,14 +80,14 @@ export default function QuestionTemplate({
               my={3}
               onClick={() => !hasAnswered && setSelection({ value, answer })}
             >
-              <Text>{value}</Text>
+              <Text>{value[language]}</Text>
             </Box>
           );
         })}
       </Flex>
       {hasAnswered && (
         <Box>
-          <Text>{explanation}</Text>
+          <Text>{explanation[language]}</Text>
         </Box>
       )}
       <Flex w="100%" alignItems="center" justifyContent="end" mt={9}>
@@ -84,7 +100,7 @@ export default function QuestionTemplate({
               reset();
             }}
           >
-            Next
+            {next[language]}
           </PrimaryButton>
         ) : (
           <PrimaryButton
@@ -98,7 +114,7 @@ export default function QuestionTemplate({
               });
             }}
           >
-            Submit
+            {submit[language]}
           </PrimaryButton>
         )}
       </Flex>

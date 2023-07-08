@@ -17,6 +17,7 @@ import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
 
 import PrimaryButton from '../common/PrimaryButton';
 import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
 
 const formStateEnum = {
@@ -30,8 +31,10 @@ export default function UploadPhoto() {
   const [formState, setFormState] = useState(formStateEnum.UNOPENED);
   const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef(null);
-  const { auth, activeLoginModal } = useAppContext();
+  const { auth, activeLoginModal, language } = useAppContext();
   const { uploadFeed } = useFeedContext();
+  const { title, subtext } = appCopy.feed.upload;
+  const { share, cancel } = appCopy.common;
 
   const submitHandler = async () => {
     setFormState(formStateEnum.SUBMITTING);
@@ -190,7 +193,7 @@ export default function UploadPhoto() {
                     textTransform="uppercase"
                     fontWeight="light"
                   >
-                    Share your special moments with us
+                    {title[language]}
                   </Heading>
                   <Text
                     fontSize="sm"
@@ -198,9 +201,7 @@ export default function UploadPhoto() {
                     mt={5}
                     fontWeight="normal"
                   >
-                    Whether it&apos;s a candid shot of the happy couple or a
-                    fun-filled moment from the celebration or an unglam photo of
-                    the groom, your photos will help create a lasting treasure
+                    {subtext[language]}
                   </Text>
                   <Box
                     mx="auto"
@@ -261,7 +262,7 @@ export default function UploadPhoto() {
                       variant="solid"
                       mr={3}
                     >
-                      Share
+                      {share[language]}
                     </PrimaryButton>
                     <PrimaryButton
                       w="50%"
@@ -274,7 +275,7 @@ export default function UploadPhoto() {
                       onClick={cancelHandler}
                       variant="outline"
                     >
-                      Cancel
+                      {cancel[language]}
                     </PrimaryButton>
                   </Flex>
                 </Flex>

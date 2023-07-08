@@ -2,6 +2,8 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
+import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 import QuestionBank from '~/lib/contexts/QuizQuestions.json';
 
 import QuestionTemplate from './QuestionTemplate';
@@ -12,13 +14,15 @@ export default function Quiz() {
   const [score, setScore] = useState(0);
 
   const goNextQuestion = () => setCurrentQuestion(currentQuestion + 1);
+  const { language } = useAppContext();
+  const { text, innerSubtext } = appCopy.journey.navigation.quiz;
 
   return (
     <Box color="brand.300" textAlign="center" my={9}>
       <Heading textTransform="uppercase" fontWeight="light" fontSize="2xl">
-        Two truths, one lie
+        {text[language]}
       </Heading>
-      <Text fontSize="sm">Guess the lie</Text>
+      <Text fontSize="sm">{innerSubtext[language]}</Text>
       <AnimatePresence>
         {QuestionBank.length === currentQuestion ? (
           <QuizResults score={Math.round((score * 100) / currentQuestion)} />

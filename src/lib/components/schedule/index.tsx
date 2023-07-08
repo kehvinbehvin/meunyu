@@ -3,8 +3,13 @@ import { Image, Box, Heading, Flex, Text, Button } from '@chakra-ui/react';
 import FramerFadeIn from '../common/FramerFadeIn';
 import schedule1 from '~/assets/schedule/schedule-1.png';
 import scheduleChurch from '~/assets/schedule/schedule-church.png';
+import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 
 export default function Schedule() {
+  const { language } = useAppContext();
+
+  const { title, dinner, matrimony } = appCopy.schedule;
   return (
     <Box position="absolute" left={0} pb="100px">
       <FramerFadeIn>
@@ -15,7 +20,7 @@ export default function Schedule() {
           fontWeight="thin"
           mb={3}
         >
-          Schedule
+          {title[language]}
         </Heading>
         <Image src={schedule1.src} />
         <Flex
@@ -28,13 +33,9 @@ export default function Schedule() {
           mt={5}
         >
           <Heading textTransform="uppercase" fontWeight="light">
-            Holy matrimony
+            {matrimony.title[language]}
           </Heading>
-          <Text fontSize="xs">
-            Lutheran Church of Our Redeemer Level 3 Sanctuary 30 Duke&apos;s Rd,
-            Singapore 268912
-          </Text>
-          <Text fontSize="xs">Please be seated by 9.30am.</Text>
+          <Text fontSize="xs">{matrimony.subtext.en}</Text>
           <Button
             bg="transparent"
             border="1px solid #9D9F92"
@@ -63,14 +64,9 @@ export default function Schedule() {
           mt={5}
         >
           <Heading textTransform="uppercase" fontWeight="light">
-            BANQUET DINNER
+            {dinner.title[language]}
           </Heading>
-          <Text fontSize="xs">
-            One Farrer Hotel Napier, Read & Spottiswoode Level 6 1 Farrer Park
-            Station Road Singapore 217562 The Tea Ceremony for family will begin
-            at 6.30pm.
-          </Text>
-          <Text fontSize="xs">Please be seated by 7.00pm.</Text>
+          <Text fontSize="xs">{dinner.subtext.en}</Text>
           <Button
             bg="transparent"
             border="1px solid #9D9F92"

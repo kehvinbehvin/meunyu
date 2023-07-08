@@ -1,32 +1,40 @@
 import { Box, Text, Heading, Flex, Link } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
 import mask1 from '~/assets/journey-mask-1.png';
 import mask2 from '~/assets/journey-mask-2.png';
 import mask3 from '~/assets/journey-mask-3.png';
+import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 
 export default function OurJourney() {
-  const routes = [
-    {
-      href: '/journey/story',
-      header: 'Our Story',
-      subtitle: "Love's journey revealed",
-      bgImage: mask1.src,
-    },
-    {
-      href: '/journey/gallery',
-      header: 'Gallery',
-      subtitle: 'Our cherished moments',
-      bgImage: mask2.src,
-    },
-    {
-      href: '/journey/quiz',
-      header: 'Two truths, One lie',
-      subtitle: 'How much do you know us?',
-      bgImage: mask3.src,
-    },
-  ];
+  const { language } = useAppContext();
+  const { story, gallery, quiz } = appCopy.journey.navigation;
+  const routes = useMemo(
+    () => [
+      {
+        href: '/journey/story',
+        header: story.text[language],
+        subtitle: story.subtext[language],
+        bgImage: mask1.src,
+      },
+      {
+        href: '/journey/gallery',
+        header: gallery.text[language],
+        subtitle: gallery.subtext[language],
+        bgImage: mask2.src,
+      },
+      {
+        href: '/journey/quiz',
+        header: quiz.text[language],
+        subtitle: quiz.subtext[language],
+        bgImage: mask3.src,
+      },
+    ],
+    [language]
+  );
   return (
     <Box>
       {routes.map((route) => (

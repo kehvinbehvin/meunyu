@@ -1,34 +1,58 @@
 [
   {
-    "explanation": "We all know it, Matt skips cardio",
+    "explanation": {
+      "en": "We all know it, Matt skips cardio",
+      "ko": "우리 모두 알고 있습니다, 매트는 유산소 운동을 건너뜁니다"
+    },
     "options": [
       {
-        "value": "Matt once gave up his seat for a pregnant lady on the train but she was not pregnant",
+        "value": {
+          "en": "Matt once gave up his seat for a pregnant lady on the train but she was not pregnant",
+          "ko": "매트는 한 번 기차에서 임산부를 위해 자리를 양보했지만 그녀는 임신하지 않았습니다"
+        },
         "answer": false
       },
       {
-        "value": "Matt can speak 4 languages",
+        "value": {
+          "en": "Matt can speak 4 languages",
+          "ko": "매트는 4개의 언어를 구사할 수 있습니다"
+        },
         "answer": false
       },
       {
-        "value": "Matt once ran a full marathon and finished top 10 in the U18 category",
+        "value": {
+          "en": "Matt once ran a full marathon and finished top 10 in the U18 category",
+          "ko": "매트는 한 번 전체 마라톤을 뛰었고 U18 카테고리에서 상위 10명 안에 들었습니다"
+        },
         "answer": true
       }
     ]
   },
   {
-    "explanation": "The only time she's been in a pool is to get baptised!",
+    "explanation": {
+      "en": "The only time she's been in a pool is to get baptised!",
+      "ko": "그녀가 수영장에 있던 유일한 시간은 세례를 받을 때입니다!"
+    },
     "options": [
       {
-        "value": "Eunyu went to 4 different primary schools",
+        "value": {
+          "en": "Eunyu went to 4 different primary schools",
+          "ko": "은유는 4개의 다른 초등학교에 다녔습니다"
+        },
         "answer": false
       },
       {
-        "value": "Eunyu used to sell kimchi to her friends in secondary school",
+        "value": {
+          "en": "Eunyu used to sell kimchi to her friends in secondary school",
+          "ko": "은유는 중학교 친구들에게 김치를 팔았습니다"
+        },
         "answer": false
       },
       {
-        "value": "Eunyu used to be a competitive swimmer in UK",
+        "value": {
+          "en": "Eunyu used to be a competitive swimmer in UK",
+          "ko": "은유는 영국에서 경쟁 수영 선수였습니다"
+        },
         "answer": true
       }
     ]

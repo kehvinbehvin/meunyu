@@ -9,4 +9,5 @@ type User = {
     dinner: boolean;
   };
   isAdmin: boolean;
+  language: 'en' | 'ko';
 };

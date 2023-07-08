@@ -4,19 +4,11 @@ import { useEffect, useMemo, useState } from 'react';
 
 import WeddingRingGif from '~/assets/ring.gif';
 import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 
 export default function LoaderScreen() {
-  const { isLoading } = useAppContext();
-  const texts = [
-    'Preparing the bride',
-    'Finding the flower girl',
-    "Shaving groom's beard",
-    'Polishing wedding rings',
-    'Frosting wedding cake',
-    'Surviving the gatecrash',
-    'Memorising vows',
-    'Groom learning korean',
-  ];
+  const { isLoading, language } = useAppContext();
+  const texts = useMemo(() => appCopy.feed.loader[language], [language]);
 
   const [textIndex, setTextIndex] = useState(
     Math.floor(Math.random() * texts.length) + 1
