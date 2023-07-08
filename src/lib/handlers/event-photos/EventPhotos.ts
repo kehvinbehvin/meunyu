@@ -17,7 +17,7 @@ const postEventPhotos = (router: any) => {
       if (req.files.length === 0) {
         res.status(400).json({ error: 'No file detected' });
       } else {
-        const images = await saveImages(req.files);
+        const images = await saveImages(req.user.id, req.files);
         if (images && images.length > 0) {
           await likeImage(req.user.id, images[0].fid);
         }

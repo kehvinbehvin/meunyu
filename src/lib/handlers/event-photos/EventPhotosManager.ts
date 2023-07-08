@@ -3,10 +3,11 @@ import { intialiseDB } from '../../clients/supabase';
 
 const supabase = intialiseDB();
 
-export const saveImages = async (files: Array<any>) => {
+export const saveImages = async (userId: String, files: Array<any>) => {
   const payload = files.map((file) => {
     return {
       url: file.location,
+      author_id: userId 
     };
   });
 
