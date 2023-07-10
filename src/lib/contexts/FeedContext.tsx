@@ -16,7 +16,7 @@ type FeedContextType = {
 export type FeedItem = {
   fid: number;
   url: string;
-  author: string;
+  author_name: string;
   caption: string;
   avatar: HTMLImageElement;
   likes: number[];
@@ -59,7 +59,7 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(showLoading);
     const fetchedFeed = await apiService.getFeed();
     const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
-      const avatar = await generateAvatar(_feed.User.name);
+      const avatar = await generateAvatar(_feed.author_name);
       return {
         ..._feed,
         avatar,

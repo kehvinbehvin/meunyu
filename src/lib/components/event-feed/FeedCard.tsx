@@ -53,7 +53,7 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
             border="1px solid rgba(0,0,0,0.1)"
           />
           <Text fontWeight="bold" fontSize="md">
-            {feed.author}
+            {feed.author_name}
           </Text>
         </Flex>
         <Flex
