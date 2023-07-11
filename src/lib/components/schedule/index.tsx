@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
 import schedule1 from '~/assets/schedule/schedule-1.png';
+import scheduleChurchKorean from '~/assets/schedule/schedule-church-korean.png';
 import scheduleChurch from '~/assets/schedule/schedule-church.png';
 import { useAppContext } from '~/lib/contexts/AppContext';
 import { appCopy } from '~/lib/contexts/AppCopy';
@@ -57,7 +58,11 @@ export default function Schedule() {
             Google maps
           </Button>
 
-          <Image src={scheduleChurch.src} />
+          <Image
+            src={
+              language === 'en' ? scheduleChurch.src : scheduleChurchKorean.src
+            }
+          />
         </Flex>
         {showDinner && (
           <>
