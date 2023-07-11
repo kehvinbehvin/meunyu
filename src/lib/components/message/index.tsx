@@ -29,13 +29,18 @@ export default function Message() {
             border="1px solid black"
             borderColor="brand.200"
             overflow="hidden"
-            borderRadius="300px"
-            mt={9}
+            borderRadius="full"
+            mt={5}
             p={3}
-            h="330px"
+            maxW="300px"
+            mx="auto"
           >
-            <Box borderRadius="300px" overflow="hidden" h="300px">
-              <Image bgPos="center center" src={messagePlaceholder.src} />
+            <Box borderRadius="full" overflow="hidden">
+              <Image
+                bgPos="center center"
+                src={messagePlaceholder.src}
+                mx="auto"
+              />
             </Box>
           </Box>
           <Box>
