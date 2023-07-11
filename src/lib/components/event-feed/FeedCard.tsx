@@ -67,7 +67,7 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
         >
           <Icon as={FaHeart} mr={2} fontSize="xs" />
           <Text fontSize="md" color="white">
-            {feed.likes?.length || 1 + (isLiked ? 1 : 0)}
+            {feed.likes.length + (isLiked ? 1 : 0) || 1 + (isLiked ? 1 : 0)}
           </Text>
         </Flex>
       </Flex>
