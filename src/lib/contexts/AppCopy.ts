@@ -66,7 +66,7 @@ export const appCopy = {
         },
         subtext: {
           en: 'Our cherished moments',
-          ko: '우리가 소중히 아끼는 순간들',
+          ko: '우리가 소중한 순간들',
         },
       },
       quiz: {
@@ -102,8 +102,8 @@ export const appCopy = {
         '꽃 소녀 찾기',
         '신랑의 수염 깎기',
         '결혼 반지 닦기',
-        '웨딩 케이크 위에 아이싱 치기',
-        '문을 부수고 들어오기 생존',
+        '웨딩 케이크 꾸미기',
+        '충돌의 관문에서 살아남기',
         '서약 외우기',
         '신랑이 한국어 배우기',
       ],
@@ -115,7 +115,7 @@ export const appCopy = {
       },
       subtext: {
         en: "Whether it's a candid shot of the happy couple or a fun-filled moment from the celebration or an unglam photo of the groom, your photos will help create a lasting treasure",
-        ko: '즐거운 커플의 순발력 있는 샷이든, 축하의 즐거운 순간이든, 신랑의 어색한 사진이든, 당신의 사진은 지속적인 보물을 만드는 데 도움이 될 것입니다',
+        ko: '행복한 커플의 솔직한 모습이든,  즐거운 축하의 순간이든, 신랑의 어색한 사진이든, 당신의 사진들은 영원히 간직할 수 있는 보물을 만드는 데 도움이 될 것입니다',
       },
     },
   },
