@@ -8,6 +8,7 @@ import {
   Text,
   Textarea,
   keyframes,
+  useToast,
 } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
@@ -35,11 +36,18 @@ export default function UploadPhoto() {
   const { uploadFeed } = useFeedContext();
   const { title, subtext } = appCopy.feed.upload;
   const { share, cancel } = appCopy.common;
+  const toast = useToast();
 
   const submitHandler = async () => {
     setFormState(formStateEnum.SUBMITTING);
     if (image) await uploadFeed(image);
     setFormState(formStateEnum.SUBMITTED);
+    toast({
+      title: 'Image uploaded',
+      description: 'Our friendly admins will be approving your image shortly',
+      status: 'success',
+      position: 'top',
+    });
   };
 
   const cancelHandler = async () => {
