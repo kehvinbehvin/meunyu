@@ -1,7 +1,8 @@
-import { Heading, Box, Image, Text } from '@chakra-ui/react';
+import { Heading, Box, Image, Text, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
+import PrimaryButton from '../common/PrimaryButton';
 import messagePlaceholder from '~/assets/message/message-placeholder.png';
 import { useAppContext } from '~/lib/contexts/AppContext';
 
@@ -16,6 +17,20 @@ export default function Message() {
 
   return (
     <FramerFadeIn>
+      {!auth.user && (
+        <Flex
+          mt={9}
+          flexDir="column"
+          h="50vh"
+          justify="center"
+          textAlign="center"
+        >
+          <Text>You must be logged in to view messages</Text>
+          <PrimaryButton onClick={activeLoginModal} mt={5} w="200px" mx="auto">
+            Log in
+          </PrimaryButton>
+        </Flex>
+      )}
       {auth.user && (
         <Box textAlign="center">
           <Heading
