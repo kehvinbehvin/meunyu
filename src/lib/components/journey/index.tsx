@@ -36,7 +36,7 @@ export default function OurJourney() {
     [language]
   );
   return (
-    <Box>
+    <Box mt="8vh">
       {routes.map((route) => (
         <Link href={route.href} key={route.href}>
           <FramerFadeIn>
