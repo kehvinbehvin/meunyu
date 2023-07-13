@@ -29,9 +29,13 @@ const postEventPhotos = (router: any) => {
 
 const getEventPhotos = (router: any) => {
   router.get(async (req: NextApiRequest, res: NextApiResponse) => {
-    const { limit = '20', offset = '0', sort } = req.query;
+    const { limit = '20', offset = '0', sort = "" } = req.query;
 
-    const files = await loadImages({ limit: +limit, offset: +offset, sort });
+    if (Array.isArray(sort)) {
+      return res.status(401).json({ errorMessage: "Invalid query"})
+    }
+
+    const files = await loadImages({ limit: +limit, offset: +offset, sort});
 
 
     res.json({ data: files });
