@@ -42,16 +42,26 @@ export const likeImage = async (authorId: number, imageId: number) => {
 export const loadImages = async ({
   offset,
   limit,
+  sort
 }: {
   offset: number;
   limit: number;
+  sort: string;
 }) => {
   try {
-    const { data } = await supabase
+    if (sort === "likes") {
+      const { data } = await supabase
       .rpc('load_likeby_images')
       .eq('status', 'Approved')
       .eq('deleted', false)
       .range(offset, offset + limit);
+      return data
+    }
+
+    const { data } = await supabase
+      .from('Image')
+      .select("*")
+      .order('updated_at', { ascending: false })
 
     return data
   } catch (error) {
