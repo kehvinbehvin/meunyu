@@ -16,8 +16,10 @@ class ApiService {
     });
   }
 
-  async getFeed() {
-    const { data } = await this.api.get('/event-photo/');
+  async getFeed(offset = 0, limit = 20) {
+    const { data } = await this.api.get(
+      `/event-photo?offset=${offset}&limit=${limit}`
+    );
     return data;
   }
 

@@ -11,6 +11,7 @@ import { useAppContext } from './AppContext';
 type FeedContextType = {
   feed: FeedItem[];
   uploadFeed: (file: File) => Promise<void>;
+  fetchMoreFeed: () => Promise<void>;
 };
 
 export type FeedItem = {
@@ -30,6 +31,9 @@ const FeedContext = createContext({} as FeedContextType);
 const FeedContextProvider = ({ children }: { children: ReactNode }) => {
   const { delayCloseLoading, setIsLoading, auth, activeLoginModal, isLoading } =
     useAppContext();
+  const [offset, setOffset] = useState(0);
+  const limit = 5;
+  const [noMoreIncoming, setNoMoreIncoming] = useState(false);
   const [feed, setFeed] = useState<FeedItem[]>([]);
 
   useEffect(() => {
@@ -52,12 +56,32 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const fetchMoreFeed = async () => {
+    if (noMoreIncoming) {
+      return;
+    }
+    const fetchedFeed = await apiService.getFeed(offset, limit);
+    const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
+      const avatar = await generateAvatar(_feed.author_name);
+      return {
+        ..._feed,
+        avatar,
+      };
+    });
+    const newFeed = await Promise.all(feedWithAvatar);
+    if (newFeed.length < limit) {
+      setNoMoreIncoming(true);
+    }
+    setFeed([...feed, ...newFeed]);
+    setOffset(offset + limit);
+  };
+
   /**
    * Fetch feed from server
    */
   const getFeed = async (showLoading = true) => {
     setIsLoading(showLoading);
-    const fetchedFeed = await apiService.getFeed();
+    const fetchedFeed = await apiService.getFeed(offset, limit);
     const feedWithAvatar = fetchedFeed.data.map(async (_feed: any) => {
       const avatar = await generateAvatar(_feed.author_name);
       return {
@@ -67,6 +91,7 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
     });
 
     setFeed(await Promise.all(feedWithAvatar));
+    setOffset(offset + limit);
     delayCloseLoading();
   };
 
@@ -82,7 +107,7 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <FeedContext.Provider value={{ feed, uploadFeed }}>
+    <FeedContext.Provider value={{ feed, uploadFeed, fetchMoreFeed }}>
       {children}
     </FeedContext.Provider>
   );

@@ -7,7 +7,7 @@ export const saveImages = async (userId: String, files: Array<any>) => {
   const payload = files.map((file) => {
     return {
       url: file.location,
-      author_id: userId 
+      author_id: userId
     };
   });
 
@@ -51,7 +51,7 @@ export const loadImages = async ({
       .rpc('load_likeby_images')
       .eq('status', 'Approved')
       .eq('deleted', false)
-      .range(offset, offset + limit);
+      .range(offset, offset + limit - 1);
 
     return data
   } catch (error) {
