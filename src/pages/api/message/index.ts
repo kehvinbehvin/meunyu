@@ -26,11 +26,11 @@ router.get(checkUser, async (req: NextApiRequest, res: NextApiResponse) => {
 
     const message = await retrieveUserMessage(user);
     if (message === "") {
-        const defaultMessage = "This is the default"
-        res.send({ message:  "<p>" + defaultMessage + "<p>" });
+        const defaultMessage = await configService.getDefaultMessages();
+        return res.send({ message:  "<p>" + defaultMessage + "<p>" });
     }
     
-    res.send({ message: "<p>" + message + "<p>" });
+    return res.send({ message: "<p>" + message + "<p>" });
 });
 
 // Intialise router
