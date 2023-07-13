@@ -62,7 +62,10 @@ export const loadImages = async ({
     const { data } = await supabase
       .from('Image')
       .select("*")
+      .eq('status', 'Approved')
+      .eq('deleted', false)
       .order('updated_at', { ascending: false })
+      .range(offset, offset + limit);
 
     return data
   } catch (error) {
