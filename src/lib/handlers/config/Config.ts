@@ -24,6 +24,15 @@ class ConfigService {
 
     return JSON.parse((data as any[])[0].value);
   }
+
+  async getDefaultMessages() {
+    const { data } = await this.supabase
+      .from('Config')
+      .select('value')
+      .eq('key', 'defaultMessages');
+
+    return (data as any[])[0].value;
+  }
 }
 
 export const configService = new ConfigService();
