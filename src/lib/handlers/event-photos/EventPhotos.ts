@@ -17,7 +17,7 @@ const postEventPhotos = (router: any) => {
       if (req.files.length === 0) {
         res.status(400).json({ error: 'No file detected' });
       } else {
-        const images = await saveImages(req.user.id, req.files);
+        const images = await saveImages(req.user.id, req.files, req.body.captions);
         if (images && images.length > 0) {
           await likeImage(req.user.id, images[0].fid);
         }
@@ -29,8 +29,15 @@ const postEventPhotos = (router: any) => {
 
 const getEventPhotos = (router: any) => {
   router.get(async (req: NextApiRequest, res: NextApiResponse) => {
-    const { limit = '20', offset = '0' } = req.query;
-    const files = await loadImages({ limit: +limit, offset: +offset });
+    const { limit = '20', offset = '0', sort = "" } = req.query;
+
+    if (Array.isArray(sort)) {
+      return res.status(401).json({ errorMessage: "Invalid query"})
+    }
+
+    const files = await loadImages({ limit: +limit, offset: +offset, sort});
+
+
     res.json({ data: files });
   });
 };
