@@ -13,15 +13,16 @@ router.get(checkUser, async (req: NextApiRequest, res: NextApiResponse) => {
     // @ts-ignore
     const user = req.user
 
-    if (!user) {
-        throw new Error('User is not logged in');
-    }
-
     const showMessages = await configService.getShowMessages();
     if (!showMessages) {
         res.status(403).json({
             error: "Message not yet visible"
         })
+    }
+
+    if (!user) {
+      const defaultMessage = await configService.getDefaultMessages();
+      return res.send({ message:  "<p>" + defaultMessage + "<p>" });
     }
 
     const message = await retrieveUserMessage(user);
