@@ -60,8 +60,7 @@ export const loadImages = async ({
     }
 
     const { data } = await supabase
-      .from('Image')
-      .select("*")
+      .rpc("load_latest_images")
       .eq('status', 'Approved')
       .eq('deleted', false)
       .order('updated_at', { ascending: false })
