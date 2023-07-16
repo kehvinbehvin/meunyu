@@ -22,16 +22,16 @@ router.get(checkUser, async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (!user) {
       const defaultMessage = await configService.getDefaultMessages();
-      return res.send({ message:  "<p>" + defaultMessage + "<p>" });
+      return res.send({ message:   defaultMessage  });
     }
 
     const message = await retrieveUserMessage(user);
     if (message === "") {
         const defaultMessage = await configService.getDefaultMessages();
-        return res.send({ message:  "<p>" + defaultMessage + "<p>" });
+        return res.send({ message:  defaultMessage  });
     }
-    
-    return res.send({ message: "<p>" + message + "<p>" });
+
+    return res.send({ message: message });
 });
 
 // Intialise router
@@ -42,7 +42,7 @@ export default router.handler({
       });
     },
   });
-  
+
   export const config = {
     api: {
       bodyParser: true, // Disallow body parsing, consume as stream

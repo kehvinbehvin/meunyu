@@ -1,18 +1,27 @@
 import { Heading, Box, Image, Text } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
 import messagePlaceholder from '~/assets/message/message-placeholder.png';
+import { apiService } from '~/lib/api-service';
 import { useAppContext } from '~/lib/contexts/AppContext';
 
 export default function Message() {
+  const [message, setMessage] = useState<string>('<p></p>');
   const { auth, activeLoginModal } = useAppContext();
 
+  const fetchUserMessage = async () => {
+    const userMessage = await apiService.getMessage();
+    setMessage(userMessage.message);
+  };
+
   useEffect(() => {
-    if (!auth.loggedIn) {
+    if (!auth.user) {
       activeLoginModal();
+    } else {
+      fetchUserMessage();
     }
-  }, []);
+  }, [auth]);
 
   return (
     <FramerFadeIn>
@@ -47,13 +56,13 @@ export default function Message() {
             <Heading color="brand.300" fontWeight="light" my={3}>
               Dearest {auth.user.name},
             </Heading>
-            <Text fontSize="xs" color="brand.300">
-              Your kind words, well wishes, and thoughtful gestures touched our
-              hearts deeply. The love and support we felt from you and your
-              presence made our wedding day even more meaningful and magical. We
-              were truly overwhelmed by your generosity and the effort you put
-              into being a part of our joyous occasion.
-            </Text>
+            {message && (
+              <Text
+                fontSize="xs"
+                color="brand.300"
+                dangerouslySetInnerHTML={{ __html: message }}
+              />
+            )}
           </Box>
         </Box>
       )}
