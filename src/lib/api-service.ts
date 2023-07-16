@@ -17,7 +17,7 @@ class ApiService {
   }
 
   async getFeed() {
-    const { data } = await this.api.get('/event-photo/');
+    const { data } = await this.api.get('/event-photo?sort=likes');
     return data;
   }
 
@@ -43,6 +43,11 @@ class ApiService {
 
   async getPendingImages() {
     const { data } = await this.api.get('/event-photo/all');
+    return data;
+  }
+
+  async getMessage() {
+    const { data } = await this.api.get('/message');
     return data;
   }
 
