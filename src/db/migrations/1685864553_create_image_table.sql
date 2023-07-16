@@ -6,6 +6,8 @@ create table
     url character varying null default 'NULL'::character varying,
     deleted boolean null default false,
     status public.status_enum null default 'Pending'::status_enum,
-    likes array null,
-    constraint Image_pkey primary key (fid)
+    author_id bigint null,
+    captions text null default ''::text,
+    constraint Image_pkey primary key (fid),
+    constraint Image_author_id_fkey foreign key (author_id) references "User" (id) on delete set null
   ) tablespace pg_default;

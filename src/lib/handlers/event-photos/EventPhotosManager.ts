@@ -3,11 +3,12 @@ import { intialiseDB } from '../../clients/supabase';
 
 const supabase = intialiseDB();
 
-export const saveImages = async (userId: String, files: Array<any>) => {
+export const saveImages = async (userId: String, files: Array<any>, captions: String) => {
   const payload = files.map((file) => {
     return {
       url: file.location,
-      author_id: userId 
+      author_id: userId ,
+      captions: captions,
     };
   });
 
@@ -42,15 +43,28 @@ export const likeImage = async (authorId: number, imageId: number) => {
 export const loadImages = async ({
   offset,
   limit,
+  sort
 }: {
   offset: number;
   limit: number;
+  sort: string;
 }) => {
   try {
-    const { data } = await supabase
+    if (sort === "likes") {
+      const { data } = await supabase
       .rpc('load_likeby_images')
       .eq('status', 'Approved')
       .eq('deleted', false)
+      .range(offset, offset + limit);
+      return data
+    }
+
+    const { data } = await supabase
+      .from('Image')
+      .select("*")
+      .eq('status', 'Approved')
+      .eq('deleted', false)
+      .order('updated_at', { ascending: false })
       .range(offset, offset + limit);
 
     return data
