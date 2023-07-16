@@ -8,15 +8,29 @@ import { apiService } from '~/lib/api-service';
 import { useAppContext } from '~/lib/contexts/AppContext';
 import { exportAsImage } from '~/lib/utils';
 
+const MessageNotReady = () => {
+  return (
+    <Box color="white" textAlign="center" mt="10vh">
+      <Heading textTransform="uppercase">Hold on awhile longer</Heading>
+      <Text mt={9}>Your personal messages will be coming in shortly</Text>
+    </Box>
+  );
+};
+
 export default function Message() {
+  const [isMessageReady, setIsMessageReady] = useState(true);
   const [message, setMessage] = useState<string>('<p></p>');
   const { auth, activeLoginModal } = useAppContext();
 
   const cardRef = useRef<HTMLDivElement>(null);
 
   const fetchUserMessage = async () => {
-    const userMessage = await apiService.getMessage();
-    setMessage(userMessage.message);
+    try {
+      const userMessage = await apiService.getMessage();
+      setMessage(userMessage.message);
+    } catch (err) {
+      setIsMessageReady(false);
+    }
   };
 
   useEffect(() => {
@@ -29,7 +43,8 @@ export default function Message() {
 
   return (
     <FramerFadeIn>
-      {auth.user && (
+      {!isMessageReady && <MessageNotReady />}
+      {isMessageReady && auth.user && (
         <>
           <Box
             textAlign="center"

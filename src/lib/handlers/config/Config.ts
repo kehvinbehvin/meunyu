@@ -11,7 +11,7 @@ class ConfigService {
 
   async setShowMessages(showMessages: boolean) {
     await this.supabase
-      .from('Configs')
+      .from('Config')
       .update({ value: JSON.stringify(showMessages) })
       .eq('key', 'showMessages');
   }
