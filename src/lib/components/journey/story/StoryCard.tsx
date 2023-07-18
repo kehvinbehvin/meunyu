@@ -1,6 +1,8 @@
 import { Heading, Image, chakra, shouldForwardProp } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
 
+import { useAppContext } from '~/lib/contexts/AppContext';
+
 const ChakraBox = chakra(motion.div, {
   /**
    * Allow motion props and non-Chakra props to be forwarded.
@@ -14,12 +16,13 @@ export default function StoryCard({
 }: {
   card: {
     type: string;
-    description?: string;
+    description?: { en: string; ko: string };
     imageSrc?: string;
-    header?: string;
+    header?: { en: string; ko: string };
     date?: string;
   };
 }) {
+  const { language } = useAppContext();
   return (
     <ChakraBox
       mt={3}
@@ -44,12 +47,12 @@ export default function StoryCard({
               fontWeight="thin"
               textTransform="uppercase"
             >
-              {card.header}
+              {card.header[language]}
             </Heading>
           )}
           {card.description && (
             <Heading color="brand.200" size="xs" my={2} fontWeight="thin">
-              {card.description}
+              {card.description[language]}
             </Heading>
           )}
           <Heading color="brand.200" size="xs" fontWeight="thin">
@@ -58,12 +61,29 @@ export default function StoryCard({
         </>
       ) : (
         <>
-          <Heading color="brand.200" size="md" my={3} fontWeight="bold">
-            {card.header}
-          </Heading>
-          <Heading my={4} color="brand.200" size="xs" fontWeight="thin">
-            {card.description}
-          </Heading>
+          {card.header && (
+            <Heading
+              color="brand.200"
+              size="md"
+              my={3}
+              fontWeight="bold"
+              px={5}
+            >
+              {card.header[language]}
+            </Heading>
+          )}
+          {card.description && (
+            <Heading
+              my={4}
+              color="brand.200"
+              size="xs"
+              fontWeight="thin"
+              px={5}
+              textAlign="justify"
+            >
+              {card.description[language]}
+            </Heading>
+          )}
         </>
       )}
     </ChakraBox>
