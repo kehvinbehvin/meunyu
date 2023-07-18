@@ -17,7 +17,7 @@ export type FeedItem = {
   fid: number;
   url: string;
   author_name: string;
-  caption: string;
+  captions: string;
   avatar: HTMLImageElement;
   likes: number[];
   created_at: string;

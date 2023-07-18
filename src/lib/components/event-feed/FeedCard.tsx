@@ -36,7 +36,6 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
       as={motion.div}
       whileTap={{ scale: 0.95 }}
     >
-      <Text fontSize="sm">{feed.caption}</Text>
       <Image src={feed.url} borderRadius={5} mt={2} />
       <Flex
         mt={3}
@@ -71,6 +70,9 @@ export default function FeedCard({ feed }: { feed: FeedItem }) {
           </Text>
         </Flex>
       </Flex>
+      <Text mt={3} fontSize="sm" color="white">
+        {feed.captions}
+      </Text>
     </Box>
   );
 }

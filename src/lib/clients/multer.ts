@@ -25,8 +25,8 @@ const upload = multer({
 });
 
 const checkFileType = (file: any, cb: Function) => {
-    const extTypes = ['png','jpg','jpeg']
-    const mimeTypes = ['image/png','image/jpg','image/jpeg']
+    const extTypes = ['png','jpg','jpeg','heic']
+    const mimeTypes = ['image/png','image/jpg','image/jpeg', 'image/heic']
 
     const fileName = file.originalname.toLowerCase()
     const fileExt = fileName.substring(fileName.lastIndexOf('.')+1, fileName.length) || fileName;

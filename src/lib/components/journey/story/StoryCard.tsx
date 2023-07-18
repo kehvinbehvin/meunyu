@@ -1,6 +1,8 @@
 import { Heading, Image, chakra, shouldForwardProp } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
 
+import { useAppContext } from '~/lib/contexts/AppContext';
+
 const ChakraBox = chakra(motion.div, {
   /**
    * Allow motion props and non-Chakra props to be forwarded.
@@ -12,14 +14,21 @@ const ChakraBox = chakra(motion.div, {
 export default function StoryCard({
   card,
 }: {
-  card: { imageSrc: string; description: string; date: string };
+  card: {
+    type: string;
+    description?: { en: string; ko: string };
+    imageSrc?: string;
+    header?: { en: string; ko: string };
+    date?: string;
+  };
 }) {
+  const { language } = useAppContext();
   return (
     <ChakraBox
       mt={3}
       bg="white"
-      pt={8}
-      pb={2}
+      pt={5}
+      pb={3}
       px={4}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -27,13 +36,56 @@ export default function StoryCard({
       // @ts-ignore
       transition={{ duration: 0.3 }}
     >
-      <Image src={card.imageSrc} />
-      <Heading color="brand.200" size="xs" my={2} fontWeight="thin">
-        {card.description}
-      </Heading>
-      <Heading color="brand.200" size="xs" fontWeight="thin">
-        {card.date}
-      </Heading>
+      {card.type === 'photo' ? (
+        <>
+          <Image src={card.imageSrc} />
+          {card.header && (
+            <Heading
+              color="brand.200"
+              size="xs"
+              my={2}
+              fontWeight="thin"
+              textTransform="uppercase"
+            >
+              {card.header[language]}
+            </Heading>
+          )}
+          {card.description && (
+            <Heading color="brand.200" size="xs" my={2} fontWeight="thin">
+              {card.description[language]}
+            </Heading>
+          )}
+          <Heading color="brand.200" size="xs" fontWeight="thin">
+            {card.date}
+          </Heading>
+        </>
+      ) : (
+        <>
+          {card.header && (
+            <Heading
+              color="brand.200"
+              size="md"
+              my={3}
+              fontWeight="bold"
+              px={5}
+            >
+              {card.header[language]}
+            </Heading>
+          )}
+          {card.description && (
+            <Heading
+              my={4}
+              color="brand.200"
+              size="xs"
+              fontWeight="thin"
+              px={5}
+              textAlign="justify"
+            >
+              {card.description[language]}
+            </Heading>
+          )}
+        </>
+      )}
     </ChakraBox>
   );
 }
