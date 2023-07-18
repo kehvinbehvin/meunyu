@@ -59,7 +59,6 @@ export default function UploadPhoto() {
     } catch (err) {
       // eslint-disable-next-line no-alert
       alert((err as Error).message);
-    } finally {
       setFormState(formStateEnum.OPENED);
     }
   };
