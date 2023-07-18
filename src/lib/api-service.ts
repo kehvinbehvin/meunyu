@@ -5,7 +5,7 @@ class ApiService {
   api: Axios;
 
   constructor() {
-    this.api = axios.create({ timeout: 5000, baseURL: '/api' });
+    this.api = axios.create({ timeout: 20000, baseURL: '/api' });
   }
 
   addJWTToken(token: string) {
