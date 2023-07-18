@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
 import schedule1 from '~/assets/schedule/schedule-1.png';
+import schedule2 from '~/assets/schedule/schedule-2.jpeg';
 import scheduleChurchKorean from '~/assets/schedule/schedule-church-korean.png';
 import scheduleChurch from '~/assets/schedule/schedule-church.png';
 import { useAppContext } from '~/lib/contexts/AppContext';
@@ -66,7 +67,7 @@ export default function Schedule() {
         </Flex>
         {showDinner && (
           <>
-            <Image src={schedule1.src} />
+            <Image src={schedule2.src} />
             <Flex
               color="brand.300"
               textAlign="center"

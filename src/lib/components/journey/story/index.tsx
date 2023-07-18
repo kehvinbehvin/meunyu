@@ -26,6 +26,11 @@ export default function StoryComponent() {
   const storyItems = useMemo(
     () => [
       {
+        header: howWeMet.header,
+        description: howWeMet.text,
+        type: 'text',
+      },
+      {
         imageSrc: journey1.src,
         description: {
           en: 'After our hall’s choral and a capella concert!',
@@ -33,11 +38,6 @@ export default function StoryComponent() {
         },
         date: '24.02.2019',
         type: 'photo',
-      },
-      {
-        header: howWeMet.header,
-        description: howWeMet.text,
-        type: 'text',
       },
       {
         imageSrc: journey2.src,
