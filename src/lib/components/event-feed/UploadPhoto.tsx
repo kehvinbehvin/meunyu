@@ -39,15 +39,20 @@ export default function UploadPhoto() {
   const toast = useToast();
 
   const submitHandler = async () => {
-    setFormState(formStateEnum.SUBMITTING);
-    if (image) await uploadFeed(image);
-    setFormState(formStateEnum.SUBMITTED);
-    toast({
-      title: 'Image uploaded',
-      description: 'Our friendly admins will be approving your image shortly',
-      status: 'success',
-      position: 'top',
-    });
+    try {
+      setFormState(formStateEnum.SUBMITTING);
+      if (image) await uploadFeed(image);
+      setFormState(formStateEnum.SUBMITTED);
+      toast({
+        title: 'Image uploaded',
+        description: 'Our friendly admins will be approving your image shortly',
+        status: 'success',
+        position: 'top',
+      });
+    } catch (err) {
+      // eslint-disable-next-line no-alert
+      alert((err as Error).message);
+    }
   };
 
   const cancelHandler = async () => {
