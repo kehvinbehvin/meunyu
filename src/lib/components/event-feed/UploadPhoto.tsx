@@ -32,6 +32,7 @@ export default function UploadPhoto() {
   const [formState, setFormState] = useState(formStateEnum.UNOPENED);
   const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef(null);
+  const captionRef = useRef<HTMLTextAreaElement>(null);
   const { auth, activeLoginModal, language } = useAppContext();
   const { uploadFeed } = useFeedContext();
   const { title, subtext } = appCopy.feed.upload;
@@ -41,7 +42,11 @@ export default function UploadPhoto() {
   const submitHandler = async () => {
     try {
       setFormState(formStateEnum.SUBMITTING);
-      if (image) await uploadFeed(image);
+      if (image)
+        await uploadFeed(
+          image,
+          (captionRef.current as HTMLTextAreaElement).value
+        );
       setFormState(formStateEnum.SUBMITTED);
       toast({
         title: 'Image uploaded',
@@ -263,6 +268,7 @@ export default function UploadPhoto() {
                   <Textarea
                     mx="auto"
                     fontSize="md"
+                    ref={captionRef}
                     placeholder="Write a caption for the photo"
                     _placeholder={{ color: 'brand.300', opacity: 0.2 }}
                   />

@@ -10,7 +10,7 @@ import { useAppContext } from './AppContext';
 // Define the type for your context data
 type FeedContextType = {
   feed: FeedItem[];
-  uploadFeed: (file: File) => Promise<void>;
+  uploadFeed: (file: File, caption: string) => Promise<void>;
 };
 
 export type FeedItem = {
@@ -73,8 +73,8 @@ const FeedContextProvider = ({ children }: { children: ReactNode }) => {
   /**
    * Upload image to server
    */
-  const uploadFeed = async (file: File) => {
-    await apiService.uploadPhoto(file);
+  const uploadFeed = async (file: File, caption: string) => {
+    await apiService.uploadPhoto(file, caption);
   };
 
   useEffect(() => {

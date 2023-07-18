@@ -31,9 +31,10 @@ class ApiService {
     return data;
   }
 
-  uploadPhoto(file: File) {
+  uploadPhoto(file: File, caption: string) {
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('captions', caption)
     return this.api.post('/event-photo', formData);
   }
 
