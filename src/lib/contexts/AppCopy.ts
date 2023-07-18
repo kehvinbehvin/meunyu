@@ -134,7 +134,7 @@ export const appCopy = {
         ko: '사진 벽',
       },
       subtext: {
-        en: 'View and upload cherished moments from the couple from family & friends',
+        en: 'View and upload cherished moments of the couple from family & friends',
         ko: '가족과 친구들로부터 부부의 소중한 순간을 감상하고 업로드하세요',
       },
     },
