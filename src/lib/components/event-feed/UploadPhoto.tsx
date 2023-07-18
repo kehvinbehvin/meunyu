@@ -53,10 +53,14 @@ export default function UploadPhoto() {
         description: 'Our friendly admins will be approving your image shortly',
         status: 'success',
         position: 'top',
+        isClosable: true,
+        duration: 5000,
       });
     } catch (err) {
       // eslint-disable-next-line no-alert
       alert((err as Error).message);
+    } finally {
+      setFormState(formStateEnum.OPENED);
     }
   };
 
