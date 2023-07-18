@@ -17,6 +17,7 @@ import { BsArrowUpCircleFill } from 'react-icons/bs';
 import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
 
 import PrimaryButton from '../common/PrimaryButton';
+import useWindowDimensions from '../hook/useWindowDimension';
 import { useAppContext } from '~/lib/contexts/AppContext';
 import { appCopy } from '~/lib/contexts/AppCopy';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
@@ -38,6 +39,7 @@ export default function UploadPhoto() {
   const { title, subtext } = appCopy.feed.upload;
   const { share, cancel } = appCopy.common;
   const toast = useToast();
+  const { height } = useWindowDimensions();
 
   const submitHandler = async () => {
     try {
@@ -216,14 +218,16 @@ export default function UploadPhoto() {
                   >
                     {title[language]}
                   </Heading>
-                  <Text
-                    fontSize="sm"
-                    textAlign="center"
-                    mt={5}
-                    fontWeight="normal"
-                  >
-                    {subtext[language]}
-                  </Text>
+                  {height > 700 && (
+                    <Text
+                      fontSize="sm"
+                      textAlign="center"
+                      mt={5}
+                      fontWeight="normal"
+                    >
+                      {subtext[language]}
+                    </Text>
+                  )}
                   <Box
                     mx="auto"
                     as={motion.div}
@@ -237,15 +241,15 @@ export default function UploadPhoto() {
                     {image ? (
                       <Image
                         src={URL.createObjectURL(image)}
-                        w="130px"
-                        h="130px"
+                        w={height > 700 ? '130px' : '80px'}
+                        h={height > 700 ? '130px' : '80px'}
                       />
                     ) : (
                       <Icon
                         as={BiCloudUpload}
                         fontWeight="normal"
-                        w="130px"
-                        h="130px"
+                        w={height > 700 ? '130px' : '80px'}
+                        h={height > 700 ? '130px' : '80px'}
                       />
                     )}
                     <label
