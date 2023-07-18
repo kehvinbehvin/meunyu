@@ -14,10 +14,10 @@ export default function StoryCard({
 }: {
   card: {
     type: string;
-    description: string;
-    imageSrc: string;
-    header: string;
-    date: string;
+    description?: string;
+    imageSrc?: string;
+    header?: string;
+    date?: string;
   };
 }) {
   return (

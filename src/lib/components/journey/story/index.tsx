@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Box, Heading, Text } from '@chakra-ui/react';
 
 import journey1 from '~/assets/journey/1.png';
