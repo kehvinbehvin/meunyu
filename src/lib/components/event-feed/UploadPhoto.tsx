@@ -15,9 +15,9 @@ import { useEffect, useRef, useState } from 'react';
 import { BiCloudUpload } from 'react-icons/bi';
 import { BsArrowUpCircleFill } from 'react-icons/bs';
 import { MdOutlineAddAPhoto, MdFileDownloadDone } from 'react-icons/md';
+import { useWindowSize } from 'usehooks-ts';
 
 import PrimaryButton from '../common/PrimaryButton';
-import useWindowDimensions from '../hook/useWindowDimension';
 import { useAppContext } from '~/lib/contexts/AppContext';
 import { appCopy } from '~/lib/contexts/AppCopy';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
@@ -39,7 +39,7 @@ export default function UploadPhoto() {
   const { title, subtext } = appCopy.feed.upload;
   const { share, cancel } = appCopy.common;
   const toast = useToast();
-  const { height } = useWindowDimensions();
+  const { height } = useWindowSize();
 
   const submitHandler = async () => {
     try {
