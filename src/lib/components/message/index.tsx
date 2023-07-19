@@ -22,7 +22,7 @@ const MessageNotReady = () => {
 };
 
 export default function Message() {
-  const [isMessageReady, setIsMessageReady] = useState(true);
+  const [isMessageReady, setIsMessageReady] = useState(false);
   const [message, setMessage] = useState<string>('<p></p>');
   const { auth, activeLoginModal } = useAppContext();
 

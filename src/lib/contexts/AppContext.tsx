@@ -18,6 +18,7 @@ type AppContextType = {
   authGuard: (callback: any) => any;
   allUsers: User[];
   language: 'en' | 'ko';
+  logout: () => void;
 };
 
 // Create the context
@@ -67,6 +68,12 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem('user');
+    setAuth({ loggedIn: false, user: null });
+    getAllUsers();
+  };
+
   useEffect(() => {
     if (auth.user) {
       Sentry.setUser({ username: auth.user.name });
@@ -102,6 +109,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         authGuard,
         allUsers,
         language,
+        logout,
       }}
     >
       {children}
