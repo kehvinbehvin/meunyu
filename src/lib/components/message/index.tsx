@@ -6,13 +6,16 @@ import PrimaryButton from '../common/PrimaryButton';
 import messagePlaceholder from '~/assets/message/message-placeholder.png';
 import { apiService } from '~/lib/api-service';
 import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 import { exportAsImage } from '~/lib/utils';
 
 const MessageNotReady = () => {
+  const { title, subtext } = appCopy.messages.notReady;
+  const { language } = useAppContext();
   return (
     <Box color="white" textAlign="center" mt="10vh">
-      <Heading textTransform="uppercase">Hold on awhile longer</Heading>
-      <Text mt={9}>Your personal messages will be coming in shortly</Text>
+      <Heading textTransform="uppercase">{title[language]}</Heading>
+      <Text mt={9}>{subtext[language]}</Text>
     </Box>
   );
 };

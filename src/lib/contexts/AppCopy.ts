@@ -7,7 +7,7 @@ export const appCopy = {
     matrimony: {
       title: {
         en: 'Holy Matrimony',
-        ko: '성례',
+        ko: '교회예식',
       },
       subtext: {
         en: "Lutheran Church of Our Redeemer Level 3 Sanctuary 30 Duke's Rd, Singapore 268912. Please be seated by 9.30am.",
@@ -52,7 +52,7 @@ export const appCopy = {
       title: {
         header: {
           en: 'Our Story',
-          ko: '우리 이야기',
+          ko: '우리의 이야기',
         },
         subtext: {
           en: 'Once upon a time, our paths crossed. From that moment on, our love story began to unfold',
@@ -98,7 +98,7 @@ export const appCopy = {
         },
         subtext: {
           en: "Love's journey revealed",
-          ko: '사랑의 여정 공개',
+          ko: '우리의 여정',
         },
       },
       gallery: {
@@ -108,7 +108,7 @@ export const appCopy = {
         },
         subtext: {
           en: 'Our cherished moments',
-          ko: '우리가 소중한 순간들',
+          ko: '우리의 소중한 순간들',
         },
       },
       quiz: {
@@ -175,6 +175,13 @@ export const appCopy = {
     title: {
       en: 'From Us, To You',
       ko: '우리로부터, 당신에게',
+    },
+    notReady: {
+      title: { en: 'Hold on awhile longer', ko: '잠시만 기다려 주세요' },
+      subtext: {
+        en: 'Your personal messages will be coming in shortly',
+        ko: '곧 신랑 신부가 준비한 메세지가 도착할 예정입니다',
+      },
     },
   },
 };
