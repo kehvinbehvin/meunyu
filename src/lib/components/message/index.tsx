@@ -1,4 +1,5 @@
 import { Heading, Box, Image, Text } from '@chakra-ui/react';
+import * as Sentry from '@sentry/nextjs';
 import { useEffect, useRef, useState } from 'react';
 
 import FramerFadeIn from '../common/FramerFadeIn';
@@ -30,8 +31,10 @@ export default function Message() {
   const fetchUserMessage = async () => {
     try {
       const userMessage = await apiService.getMessage();
+      Sentry.captureMessage('User read message');
       setMessage(userMessage.message);
     } catch (err) {
+      Sentry.captureException(err);
       setIsMessageReady(false);
     }
   };

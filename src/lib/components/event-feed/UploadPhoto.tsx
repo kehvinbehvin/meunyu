@@ -5,11 +5,13 @@ import {
   Heading,
   Icon,
   Image,
+  Input,
   Text,
   Textarea,
   keyframes,
   useToast,
 } from '@chakra-ui/react';
+import * as Sentry from '@sentry/nextjs';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { BiCloudUpload } from 'react-icons/bi';
@@ -21,6 +23,7 @@ import PrimaryButton from '../common/PrimaryButton';
 import { useAppContext } from '~/lib/contexts/AppContext';
 import { appCopy } from '~/lib/contexts/AppCopy';
 import { useFeedContext } from '~/lib/contexts/FeedContext';
+import { fileUploadGuard } from '~/lib/utils';
 
 const formStateEnum = {
   UNOPENED: 'unopened',
@@ -44,11 +47,11 @@ export default function UploadPhoto() {
   const submitHandler = async () => {
     try {
       setFormState(formStateEnum.SUBMITTING);
-      if (image)
-        await uploadFeed(
-          image,
-          (captionRef.current as HTMLTextAreaElement).value
-        );
+      const validImage = fileUploadGuard(image);
+      await uploadFeed(
+        validImage,
+        (captionRef.current as HTMLTextAreaElement).value
+      );
       setFormState(formStateEnum.SUBMITTED);
       toast({
         title: 'Image uploaded',
@@ -61,6 +64,7 @@ export default function UploadPhoto() {
     } catch (err) {
       // eslint-disable-next-line no-alert
       alert((err as Error).message);
+      Sentry.captureException(err);
       setFormState(formStateEnum.OPENED);
     }
   };
@@ -257,7 +261,7 @@ export default function UploadPhoto() {
                       className="custom-file-upload"
                       style={{ position: 'absolute', inset: '0 0 0 0' }}
                     />
-                    <input
+                    <Input
                       id="file-upload"
                       type="file"
                       style={{ display: 'none' }}

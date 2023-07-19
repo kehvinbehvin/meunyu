@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
+import * as Sentry from '@sentry/nextjs';
 import { useRouter } from 'next/router';
 import { createContext, useState, useContext, useEffect, useMemo } from 'react';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
@@ -65,6 +66,12 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (auth.user) {
+      Sentry.setUser({ username: auth.user.name });
+    }
+  }, [auth.user]);
 
   const activeLoginModal = () => {
     setTriggerModal(triggerModal + 1);

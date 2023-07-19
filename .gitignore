@@ -53,3 +53,6 @@ sitemap*.xml
 
 user_generation_scripts/output/*
 .env*
+
+# Sentry Auth Token
+.sentryclirc
