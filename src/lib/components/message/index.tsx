@@ -33,6 +33,7 @@ export default function Message() {
       const userMessage = await apiService.getMessage();
       Sentry.captureMessage('User read message');
       setMessage(userMessage.message);
+      setIsMessageReady(true);
     } catch (err) {
       Sentry.captureException(err);
       setIsMessageReady(false);
