@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { saveImages, loadImages, likeImage } from './EventPhotosManager';
 import { multerMiddleware } from '../../clients/multer';
 import { checkUser } from '../middleware/auth';
+import * as Sentry from '@sentry/nextjs';
 
 const registerEventPhotoRoutes = (router: any) => {
   postEventPhotos(router);
@@ -15,13 +16,19 @@ const postEventPhotos = (router: any) => {
     multerMiddleware,
     async (req: any, res: NextApiResponse) => {
       if (req.files.length === 0) {
-        res.status(400).json({ error: 'No file detected' });
+        Sentry.captureException("[postEventPhotos]: No file detected");
+        return res.status(400).json({ error: 'No file detected' });
       } else {
         const images = await saveImages(
           req.user.id,
           req.files,
           req.body.captions
         );
+
+        if (images === null) {
+          return res.status(500).json({ error: 'Error uploading image' });
+        }
+
         if (images && images.length > 0) {
           await likeImage(req.user.id, images[0].fid);
         }
