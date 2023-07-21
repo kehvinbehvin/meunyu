@@ -12,6 +12,7 @@ export interface PendingImage {
   deleted: boolean;
   status: string;
   author_id: number;
+  captions: string;
   User: {
     name: string;
   };
@@ -20,7 +21,7 @@ export interface PendingImage {
 export default function AdminPage() {
   const [images, setImages] = useState<PendingImage[]>([]);
   const [toggle, setToggle] = useState(false);
-  const { auth } = useAppContext();
+  const { auth, activeLoginModal } = useAppContext();
 
   const fetchImages = async () => {
     const fetchedImages = await apiService.getPendingImages();
@@ -48,7 +49,9 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    if (auth.user?.isAdmin) {
+    if (!auth.loggedIn) {
+      activeLoginModal();
+    } else if (auth.user?.isAdmin) {
       fetchImages();
       fetchToggle();
     }
@@ -78,26 +81,33 @@ export default function AdminPage() {
               {image.User.name}
             </Text>
             <Text my={1} textAlign="center" fontSize="xs">
+              {image.captions}
+            </Text>
+            <Text my={1} textAlign="center" fontSize="xs" opacity={0.5}>
               {new Date(image.created_at).toLocaleString()}
             </Text>
-            <Button
-              w="full"
-              my={3}
-              color="white"
-              bg="brand.200"
-              onClick={() => approveImage(image.fid)}
-            >
-              Approve
-            </Button>
-            <Button
-              w="full"
-              my={3}
-              color="white"
-              bg="brand.200"
-              onClick={() => rejectImage(image.fid)}
-            >
-              Reject
-            </Button>
+            <Flex>
+              <Button
+                w="full"
+                my={3}
+                mx={2}
+                color="white"
+                bg="brand.200"
+                onClick={() => approveImage(image.fid)}
+              >
+                Approve
+              </Button>
+              <Button
+                w="full"
+                my={3}
+                mx={2}
+                color="white"
+                bg="brand.200"
+                onClick={() => rejectImage(image.fid)}
+              >
+                Reject
+              </Button>
+            </Flex>
           </Box>
         ))}
     </Box>
