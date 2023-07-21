@@ -56,6 +56,10 @@ class ApiService {
     await this.api.post(`/event-photo/${id}/approve`);
   }
 
+  async rejectImage(id: number) {
+    await this.api.post(`/event-photo/${id}/reject`);
+  }
+
   async setShowMessage(showMessages: boolean) {
     await this.api.post(`/message/toggle-display`, { showMessages });
   }
