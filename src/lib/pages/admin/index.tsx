@@ -37,6 +37,11 @@ export default function AdminPage() {
     await apiService.approveImage(id);
   };
 
+  const rejectImage = async (id: number) => {
+    setImages(images.filter((im) => im.fid !== id));
+    await apiService.rejectImage(id);
+  };
+
   const toggleHandler = () => {
     apiService.setShowMessage(!toggle);
     setToggle(!toggle);
@@ -83,6 +88,15 @@ export default function AdminPage() {
               onClick={() => approveImage(image.fid)}
             >
               Approve
+            </Button>
+            <Button
+              w="full"
+              my={3}
+              color="white"
+              bg="brand.200"
+              onClick={() => rejectImage(image.fid)}
+            >
+              Reject
             </Button>
           </Box>
         ))}
