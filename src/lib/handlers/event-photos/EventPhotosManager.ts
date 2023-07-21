@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { intialiseDB } from '../../clients/supabase';
+import * as Sentry from '@sentry/nextjs';
 
 const supabase = intialiseDB();
 
@@ -17,11 +18,14 @@ export const saveImages = async (userId: String, files: Array<any>, captions: St
       .from('Image')
       .insert(payload)
       .select('*');
-    console.log('error', error);
-    console.log('Images saved');
+    
+    if (error) {
+      Sentry.captureException(error);
+    }
+
     return data;
   } catch (error) {
-    console.error(error);
+    Sentry.captureException(error);
   }
 };
 
@@ -32,11 +36,13 @@ export const likeImage = async (authorId: number, imageId: number) => {
       .insert({ author_id: authorId, image_id: imageId })
       .select();
 
-    console.log('error', error);
+    if (error) {
+      Sentry.captureException(error);
+    }
 
     return data;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    Sentry.captureException(error);
   }
 };
 
@@ -51,25 +57,34 @@ export const loadImages = async ({
 }) => {
   try {
     if (sort === "likes") {
-      const { data } = await supabase
+      const { data, error } = await supabase
       .rpc('load_likeby_images')
       .eq('status', 'Approved')
       .eq('deleted', false)
       .range(offset, offset + limit);
+
+      if (error) {
+        Sentry.captureException(error);
+      }
+
       return data
     }
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('Image')
       .select("*")
       .eq('status', 'Approved')
       .eq('deleted', false)
       .order('updated_at', { ascending: false })
       .range(offset, offset + limit);
+    
+    if (error) {
+      Sentry.captureException(error);
+    }
 
     return data
   } catch (error) {
-    console.error(error);
+    Sentry.captureException(error);
   }
 };
 
@@ -82,7 +97,10 @@ export const getPendingImages = async () => {
     .select('*, User(name)')
     .eq('status', 'Pending');
 
-  if (error) console.log(error);
+  if (error) {
+    Sentry.captureException(error);
+  }
+
   return data;
 };
 
@@ -94,5 +112,14 @@ export const approveImage = async (imageId: number) => {
     .from('Image')
     .update({ status: 'Approved' })
     .eq('fid', imageId);
-  if (error) console.log(error)
+
+  if (error) {
+    Sentry.captureException(error);
+  }
+
+  Sentry.addBreadcrumb({
+    message: 'Image approved',
+    category: 'debug',
+    level: 'debug',
+  });
 };

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { intialiseDB } from '../../clients/supabase';
+import * as Sentry from '@sentry/nextjs';
 
 const supabase = intialiseDB();
 
@@ -10,6 +11,7 @@ export const retrieveUserMessage = async (user: User) => {
         .eq('recipient_id', user.id);
 
     if (error) {
+        Sentry.captureException(error);
         return ""
     }
 

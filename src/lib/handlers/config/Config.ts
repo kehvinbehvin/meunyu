@@ -1,4 +1,6 @@
+/* eslint-disable */
 import type { SupabaseClient } from '@supabase/supabase-js';
+import * as Sentry from '@sentry/nextjs';
 
 import { intialiseDB } from '../../clients/supabase';
 
@@ -10,10 +12,20 @@ class ConfigService {
   }
 
   async setShowMessages(showMessages: boolean) {
-    await this.supabase
+    const { error } = await this.supabase
       .from('Config')
       .update({ value: JSON.stringify(showMessages) })
       .eq('key', 'showMessages');
+
+    if (error) {
+      Sentry.captureException(error);
+    }
+
+    Sentry.addBreadcrumb({
+      message: 'Image approved',
+      category: 'debug',
+      level: 'debug',
+    });
   }
 
   async getShowMessages() {
