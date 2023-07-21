@@ -4,6 +4,7 @@ import { saveImages, loadImages, likeImage } from './EventPhotosManager';
 import { multerMiddleware } from '../../clients/multer';
 import { checkUser } from '../middleware/auth';
 import * as Sentry from '@sentry/nextjs';
+const multer = require('multer');
 
 const registerEventPhotoRoutes = (router: any) => {
   postEventPhotos(router);
@@ -13,11 +14,23 @@ const registerEventPhotoRoutes = (router: any) => {
 const postEventPhotos = (router: any) => {
   router.post(
     checkUser,
-    multerMiddleware,
+    (req: NextApiRequest, res: NextApiResponse, next: any) => {
+      multerMiddleware(req, res, (error: any) => {
+        if (error instanceof multer.MulterError) {
+            Sentry.captureException(error);
+            return res.status(500).send(error + "\n" + "Error due to multer upload to S3");
+        } else if (error) {
+            Sentry.captureException(error);
+            return res.status(500).send(error+ "\n" + "Unknown error uploading to S3");
+        }
+        // Everything went fine.
+        next();
+    })
+    },
     async (req: any, res: NextApiResponse) => {
       if (req.files.length === 0) {
         Sentry.captureException("[postEventPhotos]: No file detected");
-        return res.status(400).json({ error: 'No file detected' });
+        return res.status(500).json({ error: 'No file uploaded to S3, check Sentry logs' });
       } else {
         const images = await saveImages(
           req.user.id,
