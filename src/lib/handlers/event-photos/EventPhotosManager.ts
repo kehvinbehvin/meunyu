@@ -96,3 +96,14 @@ export const approveImage = async (imageId: number) => {
     .eq('fid', imageId);
   if (error) console.log(error)
 };
+
+/**
+ * Called by admin to reject image
+ */
+ export const rejectImage = async (imageId: number) => {
+  const { error } = await supabase
+    .from('Image')
+    .update({ status: 'Rejected' })
+    .eq('fid', imageId);
+  if (error) console.log(error)
+};
