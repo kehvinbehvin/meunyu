@@ -26,6 +26,10 @@ export const appCopy = {
     },
   },
   common: {
+    back: {
+      en: 'Back',
+      ko: '우리의',
+    },
     share: {
       en: 'Share',
       ko: '공유하기',
@@ -114,15 +118,19 @@ export const appCopy = {
       quiz: {
         text: {
           en: 'Two truths, one lie',
-          ko: '두 가지 진실, 한 가지 거짓',
+          ko: '두 가지의 진실, 한 가지의 거짓',
         },
         subtext: {
           en: 'How much do you know us?',
-          ko: '우리에 대해 얼마나 알고 있나요?',
+          ko: '우리의 대해 얼마나 알고 있나요?',
         },
         innerSubtext: {
           en: 'Guess the lie',
           ko: '거짓말을 맞춰보세요',
+        },
+        yourScore: {
+          en: 'Your score',
+          ko: '점수',
         },
       },
     },
@@ -163,11 +171,15 @@ export const appCopy = {
     upload: {
       title: {
         en: 'Share Your Special Moments With Us',
-        ko: '당신의 특별한 순간을 우리와 공유해주세요',
+        ko: '당신이 담은 특별한 순산들을 우리와 공유해주세요',
       },
       subtext: {
         en: "Whether it's a candid shot of the happy couple or a fun-filled moment from the celebration or an unglam photo of the groom, your photos will help create a lasting treasure",
-        ko: '행복한 커플의 솔직한 모습이든,  즐거운 축하의 순간이든, 신랑의 어색한 사진이든, 당신의 사진들은 영원히 간직할 수 있는 보물을 만드는 데 도움이 될 것입니다',
+        ko: '행복한 커플의 솔직한 모습이든,  즐거운 축하의 순간이든, 신랑의 어색한 모습이든, 이 사진들을 영원히 간직할 수 있는 보물을 만들기 위해 당신의 도움을 요청합니다',
+      },
+      placeholder: {
+        en: 'Write a caption for the photo',
+        ko: '사진의 캡션을 달아주세요',
       },
     },
   },

@@ -32,8 +32,12 @@ import p6 from '~/assets/gallery/6.jpg';
 import p7 from '~/assets/gallery/7.jpg';
 import p8 from '~/assets/gallery/8.jpg';
 import p9 from '~/assets/gallery/9.jpg';
+import { useAppContext } from '~/lib/contexts/AppContext';
+import { appCopy } from '~/lib/contexts/AppCopy';
 
 export default function GalleryPhotos() {
+  const { language } = useAppContext();
+  const { back } = appCopy.common;
   const photos = [
     {
       src: p29.src,
@@ -191,7 +195,7 @@ export default function GalleryPhotos() {
       <Gallery photos={photos} direction="column" columns={2} />
       <Box h="50px" mt="100px">
         <Link href="/journey">
-          <PrimaryButton w="full">Back</PrimaryButton>
+          <PrimaryButton w="full">{back[language]}</PrimaryButton>
         </Link>
       </Box>
     </Box>

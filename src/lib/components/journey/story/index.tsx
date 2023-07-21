@@ -56,7 +56,7 @@ export default function StoryComponent() {
         imageSrc: journey3.src,
         header: {
           en: 'Our first anniversary',
-          ko: '우리 첫 번째 기념일',
+          ko: '우리의 첫 기념일',
         },
         date: '12.08.2020',
         type: 'photo',
@@ -100,7 +100,7 @@ export default function StoryComponent() {
         imageSrc: journey4.src,
         header: {
           en: 'Our Second Anniversary',
-          ko: '우리 두 번째 기념일',
+          ko: '우리의 두 번째 기념일',
         },
         date: '12.08.2021',
         type: 'photo',
@@ -113,7 +113,7 @@ export default function StoryComponent() {
         },
         description: {
           en: 'Finally reunited after circuit breaker to celebrate our birthdays!',
-          ko: '서킷 브레이커 이후 드디어 다시 만나서 우리 생일을 축하했어요!',
+          ko: '서킷 브레이커 이후 드디어 다시 만나서 우리의 생일을 축하했어요!',
         },
         date: '07.07.2020',
         type: 'photo',
@@ -126,7 +126,7 @@ export default function StoryComponent() {
         },
         description: {
           en: 'We graduated together from NUS in the same year!',
-          ko: '같은 해에 우리는 NUS에서 함께 졸업했어요!',
+          ko: '우리는 같은 해에 NUS에서  졸업했어요!',
         },
         date: '24.07.2022',
         type: 'photo',
@@ -140,7 +140,7 @@ export default function StoryComponent() {
         imageSrc: journey5.src,
         header: {
           en: 'Our Third Anniversary',
-          ko: '우리 세 번째 기념일',
+          ko: '우리의 세 번째 기념일',
         },
         date: '12.08.2022',
         type: 'photo',
@@ -149,7 +149,7 @@ export default function StoryComponent() {
         imageSrc: journey11.src,
         header: {
           en: 'SHE',
-          ko: '그녀',
+          ko: '네 라고 했습니다',
         },
         date: '28.05.2022',
         type: 'photo',
